@@ -78,10 +78,13 @@ export default function DashboardPage() {
     <>
       <TrialBanner />
       <PageHeader
-        title={`Selamat datang, ${user?.nama || ''}`}
+        title={`Dashboard Pendampingan KBC — ${user?.nama || ''}`}
         description="Ringkasan progres pendampingan madrasah piloting Kurikulum Berbasis Cinta."
         icon="📊"
       />
+      <section className="mb-6 rounded-xl border border-toska-200 bg-toska-50 p-4 text-sm leading-relaxed text-slate-700">
+        <strong className="text-navy-900">Keterangan aplikasi.</strong> Aplikasi Pendampingan Madrasah Piloting KBC ini merupakan aplikasi pendukung bagi pengawas madrasah dalam melaksanakan pendampingan, monitoring, dokumentasi eviden, rekomendasi, dan tindak lanjut implementasi Kurikulum Berbasis Cinta. Aplikasi ini disusun agar selaras dengan semangat pengawasan digital madrasah melalui MAGIS, namun tidak menggantikan aplikasi resmi Kementerian Agama.
+      </section>
 
       <div className="card-pad mb-6">
         <p className="font-semibold text-navy-900">Alur Supervisi KBC v1</p>

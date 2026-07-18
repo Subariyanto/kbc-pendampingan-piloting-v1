@@ -1,28 +1,21 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+﻿import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useData } from '../context/DataContext.jsx'
 import { ROLE_LABELS, ROLES } from '../lib/constants.js'
 
 const NAV_ITEMS = [
-  { to: '/', label: 'Dashboard', icon: '🏠', roles: ['admin', 'pengawas'] },
-  { to: '/pengawas', label: 'Pengawas Pendamping', icon: '🧑‍🏫', roles: ['admin', 'pengawas'] },
-  { to: '/program-pendampingan', label: 'Program Pendampingan Pengawas', icon: '📝', roles: ['admin', 'pengawas'] },
-  { to: '/madrasah', label: 'Madrasah Piloting', icon: '🏫', roles: ['admin', 'pengawas'] },
-  { to: '/jadwal', label: 'Jadwal Pendampingan', icon: '🗓️', roles: ['admin', 'pengawas'] },
-  { to: '/instrumen', label: 'Instrumen KBC', icon: '📋', roles: ['admin', 'pengawas'] },
-  { to: '/pendampingan', label: 'Instrumen Pendampingan', icon: '📝', roles: ['admin', 'pengawas'] },
-  { to: '/eviden', label: 'Eviden / Bukti', icon: '📎', roles: ['admin', 'pengawas'] },
-  { to: '/contoh-eviden', label: 'Contoh Eviden', icon: '🗂️', roles: ['admin', 'pengawas'] },
-  { to: '/tindak-lanjut', label: 'Rekomendasi & TL', icon: '✅', roles: ['admin', 'pengawas'] },
-  { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: '📊', roles: ['admin', 'pengawas'] },
-  { to: '/laporan-lengkap', label: 'Laporan Lengkap', icon: '📖', roles: ['admin', 'pengawas'] },
-  { to: '/panduan', label: 'Panduan Penggunaan', icon: '📘', roles: ['admin', 'pengawas'] },
-  { to: '/backup', label: 'Backup & Restore', icon: '💾', roles: ['admin', 'pengawas'] },
-  { to: '/pengaturan', label: 'Data Utama', icon: '⚙️', roles: ['admin', 'pengawas'] },
-  { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: '🎫', roles: ['admin'] }
+  { to: '/', label: 'Dashboard Pendampingan KBC', icon: '01', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
+  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: '02', roles: ['admin','pengawas','viewer'] },
+  { to: '/program-pendampingan', label: 'Program Pendampingan KBC', icon: '03', roles: ['admin','pengawas','viewer'] },
+  { to: '/jadwal', label: 'Jadwal Pendampingan', icon: '04', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
+  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: '05', roles: ['admin','pengawas','viewer'] },
+  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: '06', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
+  { to: '/eviden', label: 'Eviden Implementasi KBC', icon: '07', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
+  { to: '/tindak-lanjut', label: 'Rekomendasi dan Tindak Lanjut', icon: '08', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
+  { to: '/laporan-lengkap', label: 'Laporan Pendukung MAGIS', icon: '09', roles: ['admin','pengawas','viewer'] },
+  { to: '/pengaturan', label: 'Pengaturan', icon: '10', roles: ['admin','pengawas'] }
 ]
-
 export default function AppLayout({ children }) {
   const { user, logout } = useAuth()
   const { state } = useData()
@@ -89,7 +82,7 @@ export default function AppLayout({ children }) {
               <p className="font-medium text-slate-700">{user?.nama}</p>
               <p>{ROLE_LABELS[user?.role] || user?.role}</p>
             </div>
-            <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500" title="Keluar">↩</button>
+            <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500" title="Keluar">â†©</button>
           </div>
         </header>
 
@@ -113,7 +106,7 @@ export default function AppLayout({ children }) {
               <p className="text-[10px] text-slate-500">Pokjawas Jember</p>
             </div>
           </div>
-          <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-sm" aria-label="Keluar">↩</button>
+          <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-sm" aria-label="Keluar">â†©</button>
         </header>
 
         <main className="flex-1 px-4 lg:px-8 py-6 lg:py-8 max-w-[1400px] w-full mx-auto">
@@ -121,7 +114,7 @@ export default function AppLayout({ children }) {
         </main>
 
         <footer className="text-center text-xs text-slate-400 py-6 no-print">
-          © {new Date().getFullYear()} {settings.namaInstansi} · {settings.subInstansi}
+          Â© {new Date().getFullYear()} {settings.namaInstansi} Â· {settings.subInstansi}
         </footer>
       </div>
     </div>
@@ -187,4 +180,5 @@ function Hamburger() {
     </svg>
   )
 }
+
 
