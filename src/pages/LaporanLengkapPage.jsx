@@ -90,7 +90,7 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>Mengetahui,</p>
                     <p>Ketua Pokjawas,</p>
-                    <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">{settings.ketuaPokjawas}</p>
+                    <p className="mt-16 inline-block px-8">{settings.ketuaPokjawas}</p>
                     <p>NIP. {settings.nipKetua}</p>
                   </div>
                   <div className="text-center">
@@ -98,6 +98,12 @@ export default function LaporanLengkapPage() {
                     <p>Pengawas Pendamping,</p>
                     <p className="mt-16 inline-block px-8">{pengawasNamaLengkap}</p>
                     <p>NIP. {pengawasNip}</p>
+                  </div>
+                  <div className="text-center col-span-2 mt-4">
+                    <p>Mengetahui,</p>
+                    <p>Kepala Kemenag,</p>
+                    <p className="mt-16 inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
+                    <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                   </div>
                 </>
               )}
