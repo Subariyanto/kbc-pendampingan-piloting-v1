@@ -1,27 +1,25 @@
 ﻿import { useData } from '../context/DataContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
-import { PrintSignatureLaporanLengkap } from '../components/PrintHeader.jsx'
+import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolver.js'
 
 export default function LaporanLengkapPage() {
   const { state } = useData()
   const { user } = useAuth()
   const settings = state.settings
   
-  // Ambil pengawas dari Data Pengawas Pendamping (yang pertama/aktif)
-  const pengawas = state.pengawas && state.pengawas.length > 0 ? state.pengawas[0] : null
-  
-  // Gabung nama + gelar, uppercase
-  const pengawasNamaLengkap = pengawas ? (
-    pengawas.namaLengkap || pengawas.nama
-  ).toUpperCase() : 'SUBARIYANTO, S.PD, M.PD.I.'
+  // Pembuat laporan harus mengikuti user aktif, bukan selalu data pengawas pertama.
+  const pengawas = resolvePengawasFromUser(user, state.pengawas || []) || state.pengawas?.[0] || null
+  const pengawasNamaLengkap = (pengawas?.namaLengkap || pengawas?.nama || '____________________').toUpperCase()
   const pengawasNip = pengawas?.nip || ''
+  const dibuatKetuaPokjawas = isKetuaPokjawas(user, settings)
+  const ketuaNama = settings.ketuaPokjawas || pengawasNamaLengkap
+  const ketuaNip = settings.nipKetua || pengawasNip
   
   const handlePrint = () => {
     window.print()
   }
 
   return (
-    <>
     <div className="min-h-screen bg-slate-50 p-8">
       <button 
         onClick={handlePrint}
@@ -69,7 +67,41 @@ export default function LaporanLengkapPage() {
               Tahun Pelajaran {settings.tahunPelajaran}.
             </p>
             
-            <PrintSignatureLaporanLengkap settings={settings} pengawas={pengawas} user={user} />
+            <div className="mt-12 grid grid-cols-2 gap-8">
+              {dibuatKetuaPokjawas ? (
+                <>
+                  <div className="text-center">
+                    <p>Mengetahui,</p>
+                    <p>Kepala Kemenag,</p>
+                    <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">
+                      {settings.kepalaKemenag || '____________________'}
+                    </p>
+                    <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
+                  </div>
+                  <div className="text-center">
+                    <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                    <p>Ketua Pokjawas,</p>
+                    <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
+                    <p>NIP. {ketuaNip}</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-center">
+                    <p>Mengetahui,</p>
+                    <p>Ketua Pokjawas,</p>
+                    <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">{settings.ketuaPokjawas}</p>
+                    <p>NIP. {settings.nipKetua}</p>
+                  </div>
+                  <div className="text-center">
+                    <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                    <p>Pengawas Pendamping,</p>
+                    <p className="mt-16 inline-block px-8">{pengawasNamaLengkap}</p>
+                    <p>NIP. {pengawasNip}</p>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -102,7 +134,14 @@ export default function LaporanLengkapPage() {
               komprehensif mengenai pelaksanaan, capaian, serta rekomendasi tindak lanjut implementasi KBC 
               di madrasah piloting binaan kami.
             </p>
-            <PrintSignatureLaporanLengkap settings={settings} pengawas={pengawas} user={user} />
+            <div className="mt-8 text-right">
+              <p>{settings.subInstansi}</p>
+              <p>Pengawas Pendamping,</p>
+              <div style={{ height: 20 }} />
+              <div style={{ height: 60 }} />
+              <p className="font-semibold">{pengawasNamaLengkap}</p>
+              <p>NIP. {pengawasNip}</p>
+            </div>
           </div>
         </div>
 
@@ -558,7 +597,14 @@ export default function LaporanLengkapPage() {
               <li>Perluasan program piloting ke madrasah-madrasah lain secara bertahap</li>
             </ul>
 
-            <PrintSignatureLaporanLengkap settings={settings} pengawas={pengawas} user={user} />
+            <div className="mt-8 text-right">
+              <p>{settings.subInstansi}</p>
+              <p>Pengawas Pendamping,</p>
+              <div style={{ height: 20 }} />
+              <div style={{ height: 60 }} />
+              <p className="font-semibold">{pengawasNamaLengkap}</p>
+              <p>NIP. {pengawasNip}</p>
+            </div>
           </div>
         </div>
 
@@ -632,8 +678,8 @@ export default function LaporanLengkapPage() {
             </div>
           </div>
         </div>
+
       </div>
     </div>
-    </>
   )
 }
