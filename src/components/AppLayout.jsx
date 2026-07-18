@@ -19,7 +19,7 @@ const NAV_ITEMS = [
   { to: '/contoh-eviden', label: 'Contoh Eviden', icon: 'folder', roles: ADMIN_PENGAWAS },
   { to: '/tindak-lanjut', label: 'Rekomendasi & Tindak Lanjut', icon: 'target', roles: ALL_ROLES },
   { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: 'chart', roles: ADMIN_PENGAWAS },
-  { to: '/laporan-lengkap', label: 'Finalisasi / Laporan Pendukung MAGIS', icon: 'report', roles: ALL_ROLES },
+  { to: '/laporan-lengkap', label: 'Laporan Pendukung MAGIS', icon: 'report', roles: ALL_ROLES },
   { to: '/panduan', label: 'Panduan Penggunaan', icon: 'book', roles: ADMIN_PENGAWAS },
   { to: '/backup', label: 'Backup & Restore', icon: 'backup', roles: ADMIN_PENGAWAS },
   { to: '/pengaturan', label: 'Data Utama', icon: 'settings', roles: ADMIN_PENGAWAS },
