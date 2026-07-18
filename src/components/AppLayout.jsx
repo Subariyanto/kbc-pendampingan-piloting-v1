@@ -160,7 +160,7 @@ function SidebarItem({ to, icon, label, onClick }) {
         }`
       }
     >
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/10 text-toska-200"><MenuIcon name={icon} /></span>
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center text-toska-200"><MenuIcon name={icon} /></span>
       <span className="line-clamp-2 leading-tight">{label}</span>
     </NavLink>
   )
