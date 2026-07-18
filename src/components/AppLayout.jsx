@@ -4,17 +4,25 @@ import { useAuth } from '../context/AuthContext.jsx'
 import { useData } from '../context/DataContext.jsx'
 import { ROLE_LABELS, ROLES } from '../lib/constants.js'
 
+const ALL_ROLES = ['admin','pengawas','kepala_madrasah','viewer']
+const ADMIN_PENGAWAS = ['admin','pengawas']
 const NAV_ITEMS = [
-  { to: '/', label: 'Dashboard Pendampingan KBC', icon: '01', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
-  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: '02', roles: ['admin','pengawas','viewer'] },
-  { to: '/program-pendampingan', label: 'Program Pendampingan KBC', icon: '03', roles: ['admin','pengawas','viewer'] },
-  { to: '/jadwal', label: 'Jadwal Pendampingan', icon: '04', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
-  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: '05', roles: ['admin','pengawas','viewer'] },
-  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: '06', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
-  { to: '/eviden', label: 'Eviden Implementasi KBC', icon: '07', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
-  { to: '/tindak-lanjut', label: 'Rekomendasi dan Tindak Lanjut', icon: '08', roles: ['admin','pengawas','kepala_madrasah','viewer'] },
-  { to: '/laporan-lengkap', label: 'Laporan Pendukung MAGIS', icon: '09', roles: ['admin','pengawas','viewer'] },
-  { to: '/pengaturan', label: 'Pengaturan', icon: '10', roles: ['admin','pengawas'] }
+  { to: '/', label: 'Dashboard Pendampingan KBC', icon: '01', roles: ALL_ROLES },
+  { to: '/pengawas', label: 'Pengawas Pendamping', icon: '02', roles: ADMIN_PENGAWAS },
+  { to: '/program-pendampingan', label: 'Program Pendampingan KBC', icon: '03', roles: ALL_ROLES },
+  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: '04', roles: ALL_ROLES },
+  { to: '/jadwal', label: 'Jadwal Pendampingan', icon: '05', roles: ALL_ROLES },
+  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: '06', roles: ALL_ROLES },
+  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: '07', roles: ALL_ROLES },
+  { to: '/eviden', label: 'Eviden Implementasi KBC', icon: '08', roles: ALL_ROLES },
+  { to: '/contoh-eviden', label: 'Contoh Eviden', icon: '09', roles: ADMIN_PENGAWAS },
+  { to: '/tindak-lanjut', label: 'Rekomendasi dan Tindak Lanjut', icon: '10', roles: ALL_ROLES },
+  { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: '11', roles: ADMIN_PENGAWAS },
+  { to: '/laporan-lengkap', label: 'Laporan Pendukung MAGIS', icon: '12', roles: ALL_ROLES },
+  { to: '/panduan', label: 'Panduan Penggunaan', icon: '13', roles: ADMIN_PENGAWAS },
+  { to: '/backup', label: 'Backup & Restore', icon: '14', roles: ADMIN_PENGAWAS },
+  { to: '/pengaturan', label: 'Pengaturan / Data Utama', icon: '15', roles: ADMIN_PENGAWAS },
+  { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: '16', roles: ['admin'] }
 ]
 export default function AppLayout({ children }) {
   const { user, logout } = useAuth()
