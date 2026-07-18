@@ -91,7 +91,7 @@ export default function AppLayout({ children }) {
               <p className="font-medium text-slate-700">{user?.nama}</p>
               <p>{ROLE_LABELS[user?.role] || user?.role}</p>
             </div>
-            <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500" title="Keluar">â†©</button>
+            <button onClick={onLogout} className="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-600 text-xs font-medium" title="Keluar">Keluar</button>
           </div>
         </header>
 
@@ -115,7 +115,7 @@ export default function AppLayout({ children }) {
               <p className="text-[10px] text-slate-500">Pokjawas Jember</p>
             </div>
           </div>
-          <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-sm" aria-label="Keluar">â†©</button>
+          <button onClick={onLogout} className="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-600 text-xs font-medium" aria-label="Keluar">Keluar</button>
         </header>
 
         <main className="flex-1 px-4 lg:px-8 py-6 lg:py-8 max-w-[1400px] w-full mx-auto">
@@ -123,7 +123,7 @@ export default function AppLayout({ children }) {
         </main>
 
         <footer className="text-center text-xs text-slate-400 py-6 no-print">
-          Â© {new Date().getFullYear()} {settings.namaInstansi} Â· {settings.subInstansi}
+          © {new Date().getFullYear()} {settings.namaInstansi} · {settings.subInstansi}
         </footer>
       </div>
     </div>
