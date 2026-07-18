@@ -44,7 +44,7 @@ export default function AppLayout({ children }) {
       {/* Sidebar desktop */}
       <aside className="hidden lg:flex w-64 flex-col bg-navy-950 text-white no-print fixed left-0 top-0 bottom-0">
         <Brand settings={settings} />
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto">
           {items.map((it) => (
             <SidebarItem key={it.to} {...it} />
           ))}
@@ -60,7 +60,7 @@ export default function AppLayout({ children }) {
           <div className="absolute inset-0 bg-navy-950/60" onClick={() => setOpen(false)} />
           <aside className="absolute left-0 top-0 bottom-0 w-72 bg-navy-950 text-white flex flex-col">
             <Brand settings={settings} />
-            <nav className="flex-1 px-3 py-4 space-y-1">
+            <nav className="flex-1 px-3 py-3 space-y-0.5">
               {items.map((it) => (
                 <SidebarItem key={it.to} {...it} onClick={() => setOpen(false)} />
               ))}
@@ -153,14 +153,14 @@ function SidebarItem({ to, icon, label, onClick }) {
       end={to === '/'}
       onClick={onClick}
       className={({ isActive }) =>
-        `flex items-center gap-3 rounded-lg px-3 py-2 text-[11px] transition ${
+        `flex items-center gap-2.5 rounded-lg px-3 py-1.5 text-[11px] transition ${
           isActive
             ? 'bg-toska-500/20 text-white ring-1 ring-toska-400/40 font-medium'
             : 'text-slate-300 hover:bg-white/5 hover:text-white'
         }`
       }
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-toska-200"><MenuIcon name={icon} /></span>
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white/10 text-toska-200"><MenuIcon name={icon} /></span>
       <span className="line-clamp-2 leading-tight">{label}</span>
     </NavLink>
   )
