@@ -79,7 +79,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (SUPABASE_ENABLED || !user) return
     if (user.isTrial || user.isLocalAdmin) return // local admin/trial tidak perlu sync ke state.users
-    if (user.source === 'registered') return // registered users (from activation) tidak di state.users
+    if (user.source === 'registered' || user.source === 'official-demo') return // akun aktivasi/demo lintas perangkat tidak di state.users
     const found = state.users.find((u) => u.id === user.id)
     if (!found) {
       setUser(null)
