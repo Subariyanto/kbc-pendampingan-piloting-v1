@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   { to: '/program-pendampingan', label: 'Rencana / Program Pendampingan', icon: 'plan', roles: ALL_ROLES },
   { to: '/jadwal', label: 'Kegiatan / Jadwal Pendampingan', icon: 'calendar', roles: ALL_ROLES },
   { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: 'check', roles: ALL_ROLES },
-  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: 'note', roles: ALL_ROLES },
+  { to: '/pendampingan', label: 'Refleksi Kondisi Madrasah', icon: 'note', roles: ALL_ROLES },
   { to: '/eviden', label: 'Dokumentasi / Eviden KBC', icon: 'file', roles: ALL_ROLES },
   { to: '/contoh-eviden', label: 'Contoh Eviden', icon: 'folder', roles: ADMIN_PENGAWAS },
   { to: '/tindak-lanjut', label: 'Rekomendasi & Tindak Lanjut', icon: 'target', roles: ALL_ROLES },
