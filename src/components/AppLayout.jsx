@@ -8,21 +8,22 @@ const ALL_ROLES = ['admin','pengawas','kepala_madrasah','viewer']
 const ADMIN_PENGAWAS = ['admin','pengawas']
 const NAV_ITEMS = [
   { to: '/', label: 'Dashboard Pendampingan KBC', icon: '01', roles: ALL_ROLES },
-  { to: '/pengawas', label: 'Pengawas Pendamping', icon: '02', roles: ADMIN_PENGAWAS },
-  { to: '/program-pendampingan', label: 'Program Pendampingan KBC', icon: '03', roles: ALL_ROLES },
-  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: '04', roles: ALL_ROLES },
-  { to: '/jadwal', label: 'Jadwal Pendampingan', icon: '05', roles: ALL_ROLES },
-  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: '06', roles: ALL_ROLES },
-  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: '07', roles: ALL_ROLES },
-  { to: '/eviden', label: 'Eviden Implementasi KBC', icon: '08', roles: ALL_ROLES },
-  { to: '/contoh-eviden', label: 'Contoh Eviden', icon: '09', roles: ADMIN_PENGAWAS },
-  { to: '/tindak-lanjut', label: 'Rekomendasi dan Tindak Lanjut', icon: '10', roles: ALL_ROLES },
-  { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: '11', roles: ADMIN_PENGAWAS },
-  { to: '/laporan-lengkap', label: 'Laporan Pendukung MAGIS', icon: '12', roles: ALL_ROLES },
-  { to: '/panduan', label: 'Panduan Penggunaan', icon: '13', roles: ADMIN_PENGAWAS },
-  { to: '/backup', label: 'Backup & Restore', icon: '14', roles: ADMIN_PENGAWAS },
-  { to: '/pengaturan', label: 'Pengaturan / Data Utama', icon: '15', roles: ADMIN_PENGAWAS },
-  { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: '16', roles: ['admin'] }
+  { to: '/alur-pengawasan', label: 'Alur Pengawasan Digital', icon: '02', roles: ALL_ROLES },
+  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: '03', roles: ALL_ROLES },
+  { to: '/pengawas', label: 'Pengawas Pendamping', icon: '04', roles: ADMIN_PENGAWAS },
+  { to: '/program-pendampingan', label: 'Rencana / Program Pendampingan', icon: '05', roles: ALL_ROLES },
+  { to: '/jadwal', label: 'Kegiatan / Jadwal Pendampingan', icon: '06', roles: ALL_ROLES },
+  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: '07', roles: ALL_ROLES },
+  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: '08', roles: ALL_ROLES },
+  { to: '/eviden', label: 'Dokumentasi / Eviden KBC', icon: '09', roles: ALL_ROLES },
+  { to: '/contoh-eviden', label: 'Contoh Eviden', icon: '10', roles: ADMIN_PENGAWAS },
+  { to: '/tindak-lanjut', label: 'Rekomendasi & Tindak Lanjut', icon: '11', roles: ALL_ROLES },
+  { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: '12', roles: ADMIN_PENGAWAS },
+  { to: '/laporan-lengkap', label: 'Finalisasi / Laporan Pendukung MAGIS', icon: '13', roles: ALL_ROLES },
+  { to: '/panduan', label: 'Panduan Penggunaan', icon: '14', roles: ADMIN_PENGAWAS },
+  { to: '/backup', label: 'Backup & Restore', icon: '15', roles: ADMIN_PENGAWAS },
+  { to: '/pengaturan', label: 'Pengaturan / Data Utama', icon: '16', roles: ADMIN_PENGAWAS },
+  { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: '17', roles: ['admin'] }
 ]
 export default function AppLayout({ children }) {
   const { user, logout } = useAuth()

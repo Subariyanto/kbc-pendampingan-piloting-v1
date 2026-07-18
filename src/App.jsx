@@ -5,6 +5,7 @@ import AppLayout from './components/AppLayout.jsx'
 import ActivationPage from './components/ActivationPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
+import AlurPengawasanPage from './pages/AlurPengawasanPage.jsx'
 import MadrasahPage from './pages/MadrasahPage.jsx'
 import PengawasPage from './pages/PengawasPage.jsx'
 import ProgramPendampinganPage from './pages/ProgramPendampinganPage.jsx'
@@ -118,6 +119,7 @@ export default function App() {
               <AppLayout>
                 <Routes>
                   <Route path="/" element={<DashboardPage />} />
+                  <Route path="/alur-pengawasan" element={<AlurPengawasanPage />} />
                   <Route path="/madrasah" element={<MadrasahPage />} />
                   <Route
                     path="/pengawas"
