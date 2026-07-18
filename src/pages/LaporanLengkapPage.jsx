@@ -2,6 +2,15 @@
 import { useAuth } from '../context/AuthContext.jsx'
 import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolver.js'
 
+function SignatureVisual({ signature, seal }) {
+  return (
+    <div className="h-16 flex items-center justify-center gap-1">
+      {seal && <img src={seal} alt="Stempel" className="max-h-16 max-w-16 object-contain opacity-80" />}
+      {signature && <img src={signature} alt="Tanda tangan" className="max-h-14 max-w-36 object-contain" />}
+    </div>
+  )
+}
+
 export default function LaporanLengkapPage() {
   const { state } = useData()
   const { user } = useAuth()
@@ -74,7 +83,8 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
-                    <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">
+                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} />
+                    <p className="border-t border-slate-300 pt-2 inline-block px-8">
                       {settings.kepalaKemenag || '____________________'}
                     </p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
@@ -82,7 +92,8 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Ketua Pokjawas,</p>
-                    <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
+                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} />
+                    <p className="border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
                     <p>NIP. {ketuaNip}</p>
                   </div>
                 </>
@@ -91,19 +102,22 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>Mengetahui,</p>
                     <p>Ketua Pokjawas,</p>
-                    <p className="mt-16 inline-block px-8">{settings.ketuaPokjawas}</p>
+                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} />
+                    <p className="inline-block px-8">{settings.ketuaPokjawas}</p>
                     <p>NIP. {settings.nipKetua}</p>
                   </div>
                   <div className="text-center">
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Pengawas Pendamping,</p>
-                    <p className="mt-16 whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
+                    <SignatureVisual signature={settings.ttdPengawas} />
+                    <p className="whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
                     <p className="whitespace-nowrap">NIP. {pengawasNip}</p>
                   </div>
                   <div className="text-center col-span-2 mt-4">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
-                    <p className="mt-16 inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
+                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} />
+                    <p className="inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                   </div>
                 </>
