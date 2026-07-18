@@ -47,117 +47,33 @@ export function buildSeedData() {
 
   const pengawas = [
     {
-      id: 'pengawas-fauzi',
-      nama: 'Drs. H. Ahmad Fauzi, M.Pd',
-      nip: '196805121993031005',
-      pangkat: 'Pembina Tk. I / IV-b',
-      jabatan: 'Pengawas Madya',
-      wilayah: 'KKMA 04 Sukowono',
-      hp: '081234567001',
-      email: 'fauzi@kemenagjember.go.id'
-    },
-    {
-      id: 'pengawas-marwah',
-      nama: 'Dra. Hj. Marwah Hidayati, M.Pd.I',
-      nip: '197003151995032003',
-      pangkat: 'Pembina / IV-a',
-      jabatan: 'Pengawas Madya',
-      wilayah: 'KKMA 01 Kaliwates',
-      hp: '081234567002',
-      email: 'marwah@kemenagjember.go.id'
-    },
-    {
-      id: 'pengawas-saiful',
-      nama: 'H. Saiful Anwar, S.Pd, M.Pd',
-      nip: '197508201998031006',
-      pangkat: 'Pembina / IV-a',
-      jabatan: 'Pengawas Muda',
-      wilayah: 'KKMA 02 Patrang',
-      hp: '081234567003',
-      email: 'saiful@kemenagjember.go.id'
+      "nama": "SUBARIYANTO, S.Pd, M.Pd.I.",
+      "nip": "197002122005011004",
+      "pangkat": "Pembina Tk.I, IV/b",
+      "jabatan": "Pengawas Madrasah",
+      "wilayah": "KKMA 04 JEMBER",
+      "hp": "082330647698",
+      "email": "subariyantoss2@gmail.com",
+      "id": "pengawas_mrpuww2v_v00u5a"
     }
   ]
 
   const madrasah = [
     {
-      id: 'madrasah-mtsn1',
-      nama: 'MTsN 1 Jember',
-      nsm: '121135090001',
-      npsn: '20581234',
-      jenjang: 'MTs',
-      statusNS: 'Negeri',
-      kecamatan: 'Kaliwates',
-      kepala: 'Dra. Hj. Siti Aminah, M.Ag',
-      hp: '081234567010',
-      email: 'mtsn1@kemenagjember.go.id',
-      pengawasId: 'pengawas-marwah',
-      tahunPelajaran: '2025/2026',
-      statusPiloting: 'Aktif',
-      catatan: 'Madrasah piloting unggulan dengan dukungan komite kuat.'
-    },
-    {
-      id: 'madrasah-min2',
-      nama: 'MIN 2 Sukowono',
-      nsm: '111135090002',
-      npsn: '20581235',
-      jenjang: 'MI',
-      statusNS: 'Negeri',
-      kecamatan: 'Sukowono',
-      kepala: 'Hj. Nur Hayati, S.Pd.I, M.Pd',
-      hp: '081234567011',
-      email: 'min2sukowono@kemenagjember.go.id',
-      pengawasId: 'pengawas-fauzi',
-      tahunPelajaran: '2025/2026',
-      statusPiloting: 'Aktif',
-      catatan: 'Sudah memiliki tim KBC dan SK pelaksana.'
-    },
-    {
-      id: 'madrasah-man1',
-      nama: 'MAN 1 Jember',
-      nsm: '131135090003',
-      npsn: '20581236',
-      jenjang: 'MA',
-      statusNS: 'Negeri',
-      kecamatan: 'Patrang',
-      kepala: 'Drs. H. Mahmud Yunus, M.Pd',
-      hp: '081234567012',
-      email: 'man1jember@kemenagjember.go.id',
-      pengawasId: 'pengawas-saiful',
-      tahunPelajaran: '2025/2026',
-      statusPiloting: 'Aktif',
-      catatan: 'Sedang menyusun kurikulum operasional berbasis cinta.'
-    },
-    {
-      id: 'madrasah-mts-baitul',
-      nama: 'MTs Baitul Hikmah',
-      nsm: '121235090004',
-      npsn: '20581237',
-      jenjang: 'MTs',
-      statusNS: 'Swasta',
-      kecamatan: 'Sukowono',
-      kepala: 'H. Abdul Rohman, S.Ag',
-      hp: '081234567013',
-      email: 'mts.baitulhikmah@yahoo.com',
-      pengawasId: 'pengawas-fauzi',
-      tahunPelajaran: '2025/2026',
-      statusPiloting: 'Aktif',
-      catatan: 'Madrasah swasta dengan basis pesantren.'
-    },
-    {
-      id: 'madrasah-ra-aisyiyah',
-      nama: 'RA Aisyiyah Bustanul Athfal',
-      nsm: '101235090005',
-      npsn: '20581238',
-      jenjang: 'RA',
-      statusNS: 'Swasta',
-      kecamatan: 'Kaliwates',
-      kepala: 'Hj. Faridah, S.Pd.AUD',
-      hp: '081234567014',
-      email: 'ra.aisyiyahjember@gmail.com',
-      pengawasId: 'pengawas-marwah',
-      tahunPelajaran: '2025/2026',
-      statusPiloting: 'Cadangan',
-      catatan: 'Persiapan piloting tahap berikutnya.'
+      "nama": "MA NURUL QARNAIN",
+      "nsm": "",
+      "npsn": "",
+      "jenjang": "MA",
+      "statusNS": "Swasta",
+      "kecamatan": "Sukowono",
+      "kepala": "H. Imam",
+      "hp": "",
+      "email": "",
+      "pengawasId": "",
+      "tahunPelajaran": "2026/2027",
+      "statusPiloting": "Aktif",
+      "catatan": "",
+      "id": "madrasah_mrpq880e_5i0cy8"
     }
   ]
 
