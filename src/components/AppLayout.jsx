@@ -153,7 +153,7 @@ function SidebarItem({ to, icon, label, onClick }) {
       end={to === '/'}
       onClick={onClick}
       className={({ isActive }) =>
-        `flex items-center gap-3 rounded-lg px-3 py-2 text-[12px] transition ${
+        `flex items-center gap-3 rounded-lg px-3 py-2 text-[11px] transition ${
           isActive
             ? 'bg-toska-500/20 text-white ring-1 ring-toska-400/40 font-medium'
             : 'text-slate-300 hover:bg-white/5 hover:text-white'
