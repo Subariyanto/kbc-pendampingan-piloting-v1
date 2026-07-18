@@ -15,6 +15,10 @@ export default function PengaturanPage() {
   const [confirmReset, setConfirmReset] = useState(false)
 
   const fileLogo = useRef(null)
+  const fileTtdKepala = useRef(null)
+  const fileTtdKetua = useRef(null)
+  const fileStempelPokjawas = useRef(null)
+  const fileStempelKemenag = useRef(null)
 
   const [migrating, setMigrating] = useState(false)
   const [confirmMigrate, setConfirmMigrate] = useState(null)
@@ -36,6 +40,16 @@ export default function PengaturanPage() {
   const onSave = () => {
     updateSettings(form)
     toast.success('Pengaturan tersimpan')
+  }
+
+  const onImageSetting = async (e, key, label) => {
+    const f = e.target.files?.[0]
+    if (!f) return
+    if (f.size > 1024 * 512) { toast.error(`${label} maksimal 512 KB`); return }
+    try {
+      upd(key, await readFileAsDataURL(f))
+      toast.success(`${label} siap disimpan. Klik Simpan Pengaturan.`)
+    } catch (err) { toast.error(err.message) }
   }
 
   const onLogo = async (e) => {
@@ -89,6 +103,17 @@ export default function PengaturanPage() {
             </div>
             <p className="text-xs text-slate-500 text-center">PNG/JPG, maks. 512 KB.</p>
           </div>
+        </div>
+      </div>
+
+      <div className="card-pad mb-4">
+        <p className="font-semibold text-navy-900 mb-3">Tanda Tangan & Stempel</p>
+        <p className="text-xs text-slate-500 mb-3">PNG/JPG, maksimal 512 KB. File tersimpan lokal di browser.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <ImageSetting label="Tanda Tangan Kepala Kemenag" value={form.ttdKepalaKemenag} fileRef={fileTtdKepala} onPick={(e) => onImageSetting(e, 'ttdKepalaKemenag', 'Tanda tangan Kepala Kemenag')} onClear={() => upd('ttdKepalaKemenag', '')} />
+          <ImageSetting label="Tanda Tangan Ketua Pokjawas" value={form.ttdKetuaPokjawas} fileRef={fileTtdKetua} onPick={(e) => onImageSetting(e, 'ttdKetuaPokjawas', 'Tanda tangan Ketua Pokjawas')} onClear={() => upd('ttdKetuaPokjawas', '')} />
+          <ImageSetting label="Stempel Pokjawas" value={form.stempelPokjawas} fileRef={fileStempelPokjawas} onPick={(e) => onImageSetting(e, 'stempelPokjawas', 'Stempel Pokjawas')} onClear={() => upd('stempelPokjawas', '')} />
+          <ImageSetting label="Stempel Kemenag" value={form.stempelKemenag} fileRef={fileStempelKemenag} onPick={(e) => onImageSetting(e, 'stempelKemenag', 'Stempel Kemenag')} onClear={() => upd('stempelKemenag', '')} />
         </div>
       </div>
 
@@ -169,6 +194,22 @@ export default function PengaturanPage() {
         }
       />
     </>
+  )
+}
+
+function ImageSetting({ label, value, fileRef, onPick, onClear }) {
+  return (
+    <div className="border border-slate-200 rounded-lg p-3">
+      <p className="text-sm font-medium text-slate-700 mb-2">{label}</p>
+      <div className="h-20 flex items-center justify-center border border-dashed border-slate-300 rounded mb-2">
+        {value ? <img src={value} alt={label} className="max-h-16 max-w-full object-contain" /> : <span className="text-xs text-slate-400">Belum diupload</span>}
+      </div>
+      <input ref={fileRef} type="file" accept="image/png,image/jpeg" className="hidden" onChange={onPick} />
+      <div className="flex gap-2">
+        <button type="button" className="btn-ghost text-xs" onClick={() => fileRef.current?.click()}>📂 Upload</button>
+        {value && <button type="button" className="btn-danger text-xs" onClick={onClear}>Hapus</button>}
+      </div>
+    </div>
   )
 }
 
