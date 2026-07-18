@@ -18,7 +18,7 @@ export default function PrintHeader({ settings, judul = 'LAPORAN PENDAMPINGAN IM
   )
 }
 
-export function PrintSignature({ settings, namaPengawas = '____________________', nipPengawas, tanggal, namaLengkapPengawas = '', jabatan = 'Pengawas Pendamping', align = 'right', signature }) {
+export function PrintSignature({ settings, namaPengawas = '____________________', nipPengawas, tanggal, namaLengkapPengawas = '', jabatan = 'Pengawas Pendamping', align = 'center-right', signature }) {
   const t = tanggal ? new Date(tanggal) : new Date()
   const tanggalLabel = t.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
   const namaKabupaten = settings.kabupaten || 'Jember'
@@ -26,8 +26,8 @@ export function PrintSignature({ settings, namaPengawas = '____________________'
   const namaPengawasLengkap = namaLengkapPengawas ? namaLengkapPengawas.toUpperCase() : namaPengawas.toUpperCase()
   // 'right' = blok nempel kanan (dipakai laporan 2 kolom lain), 'center-right' = tengah agak ke kanan
   const wrapperStyle = align === 'center-right'
-    ? { width: '45%', marginLeft: '50%' }
-    : { width: '50%', marginLeft: 'auto' }
+    ? { width: '44%', marginLeft: '52%', textAlign: 'center' }
+    : { width: '50%', marginLeft: 'auto', textAlign: 'center' }
 
   return (
     <div className="mt-10 text-sm font-serif">

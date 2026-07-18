@@ -546,7 +546,7 @@ function PrintModal({ item, mode, settings, instrumen, madrasah, pengawas, user,
           </div>
         )}
 
-        <SingleSignature tempat="Jember" tanggal={item.tanggal} namaPengawas={pengawasNama} nipPengawas={pengawasNip} namaLengkap={pengawasNamaLengkap} signature={settings?.ttdPengawas || resolvedPengawas?.ttdPengawas || resolvedPengawas?.signatureDataUrl || resolvedPengawas?.ttd} />
+        <SingleSignature tempat={settings?.kabupaten || 'Jember'} tanggal={item.tanggal} namaPengawas={pengawasNama} nipPengawas={pengawasNip} namaLengkap={pengawasNamaLengkap} signature={settings?.ttdPengawas || resolvedPengawas?.ttdPengawas || resolvedPengawas?.signatureDataUrl || resolvedPengawas?.ttd} />
       </div>
     </Modal>
   )
@@ -601,8 +601,8 @@ function SingleSignature({ tempat = 'Jember', tanggal, namaPengawas, nipPengawas
   const namaPengawasLengkap = (namaLengkap || namaPengawas || 'SUBARIYANTO, S.PD, M.PD.I.').toUpperCase()
   
   return (
-    <div className="mt-10 text-sm font-serif flex justify-end">
-      <div className="text-center" style={{ marginRight: '10%' }}>
+    <div className="mt-10 text-sm font-serif">
+      <div className="text-center" style={{ width: '44%', marginLeft: '52%' }}>
         <p>{tempat}, {tanggalLabel}</p>
         <p>Pengawas Pendamping,</p>
         <div className="relative h-20 flex items-center justify-center">
