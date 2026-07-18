@@ -14,6 +14,7 @@ export default function LaporanLengkapPage() {
   const dibuatKetuaPokjawas = isKetuaPokjawas(user, settings)
   const ketuaNama = settings.ketuaPokjawas || pengawasNamaLengkap
   const ketuaNip = settings.nipKetua || pengawasNip
+  const tempatTandaTangan = pengawas?.kabupaten || settings.kabupaten || 'Jember'
   
   const handlePrint = () => {
     window.print()
@@ -72,14 +73,14 @@ export default function LaporanLengkapPage() {
                 <>
                   <div className="text-center">
                     <p>Mengetahui,</p>
-                    <p>Kepala Kemenag,</p>
+                    <p>Kepala Kemenag Kab. Jember,</p>
                     <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">
                       {settings.kepalaKemenag || '____________________'}
                     </p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                   </div>
                   <div className="text-center">
-                    <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                    <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Ketua Pokjawas,</p>
                     <p className="mt-16 border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
                     <p>NIP. {ketuaNip}</p>
@@ -94,14 +95,14 @@ export default function LaporanLengkapPage() {
                     <p>NIP. {settings.nipKetua}</p>
                   </div>
                   <div className="text-center">
-                    <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                    <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Pengawas Pendamping,</p>
                     <p className="mt-16 inline-block px-8">{pengawasNamaLengkap}</p>
                     <p>NIP. {pengawasNip}</p>
                   </div>
                   <div className="text-center col-span-2 mt-4">
                     <p>Mengetahui,</p>
-                    <p>Kepala Kemenag,</p>
+                    <p>Kepala Kemenag Kab. Jember,</p>
                     <p className="mt-16 inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                   </div>

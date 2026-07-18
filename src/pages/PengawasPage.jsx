@@ -9,7 +9,7 @@ import { useScope } from '../lib/useScope.js'
 import { downloadCSV, formatDate } from '../lib/utils.js'
 import { printPrintArea } from '../lib/printHelper.js'
 
-const EMPTY = { nama: '', nip: '', pangkat: '', jabatan: '', wilayah: '', hp: '', email: '' }
+const EMPTY = { nama: '', nip: '', pangkat: '', jabatan: '', wilayah: '', kabupaten: '', hp: '', email: '' }
 
 export default function PengawasPage() {
   const { state, addOrUpdate, remove } = useData()
@@ -153,6 +153,9 @@ function PengawasFormInline({ value, onSave, onCancel, isNew }) {
         </Field>
         <Field label="Wilayah Binaan">
           <input className="input" value={form.wilayah || ''} onChange={(e) => upd('wilayah', e.target.value)} placeholder="Wilayah binaan" />
+        </Field>
+        <Field label="Kabupaten/Kota">
+          <input className="input" value={form.kabupaten || ''} onChange={(e) => upd('kabupaten', e.target.value)} placeholder="Contoh: Jember" />
         </Field>
         <Field label="Nomor HP">
           <input className="input" value={form.hp || ''} onChange={(e) => upd('hp', e.target.value)} placeholder="Nomor HP" />
