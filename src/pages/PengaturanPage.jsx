@@ -99,8 +99,8 @@ export default function PengaturanPage() {
             )}
             <input ref={fileLogo} type="file" accept="image/*" className="hidden" onChange={onLogo} />
             <div className="flex gap-2">
-              <button className="btn-ghost" onClick={() => fileLogo.current?.click()}>ðŸ“‚ Pilih Logo</button>
-              {form.logoDataUrl && <button className="btn-danger" onClick={() => upd('logoDataUrl', '')}>âœ• Hapus</button>}
+              <button className="btn-ghost" onClick={() => fileLogo.current?.click()}>Pilih Logo</button>
+              {form.logoDataUrl && <button className="btn-danger" onClick={() => upd('logoDataUrl', '')}>Hapus</button>}
             </div>
             <p className="text-xs text-slate-500 text-center">PNG/JPG, maks. 512 KB.</p>
           </div>
@@ -142,7 +142,7 @@ export default function PengaturanPage() {
       {LOCAL_ONLY_MODE && SUPABASE_ENABLED && (
         <div className="card-pad mb-4 border-2 border-amber-200 bg-amber-50/40">
           <div className="flex items-start gap-3">
-            <span className="text-2xl">ðŸ“¥</span>
+            <span className="text-2xl"></span>
             <div className="flex-1">
               <p className="font-semibold text-navy-900">Migrasi Data dari Supabase</p>
               <p className="text-sm text-slate-600 mt-1">
@@ -150,11 +150,11 @@ export default function PengaturanPage() {
               </p>
               <div className="flex gap-2 mt-3">
                 <button className="btn-toska" onClick={onMigrateFromSupabase} disabled={migrating}>
-                  {migrating ? 'Mengambil dataâ€¦' : 'â¬‡ Tarik Data dari Supabase'}
+                  {migrating ? 'Mengambil data...' : 'Tarik Data dari Supabase'}
                 </button>
               </div>
               <p className="text-xs text-amber-700 mt-2">
-                âš ï¸ Setelah migrasi, data lokal saat ini akan diganti dengan data dari Supabase. Backup dulu kalau ada perubahan yang mau dipertahankan.
+                Peringatan: Setelah migrasi, data lokal saat ini akan diganti dengan data dari Supabase. Backup dulu kalau ada perubahan yang mau dipertahankan.
               </p>
             </div>
           </div>
@@ -165,7 +165,7 @@ export default function PengaturanPage() {
         <p className="font-semibold text-navy-900 mb-3">Reset Data Demo</p>
         <p className="text-sm text-slate-600 mb-3">Kembalikan seluruh data ke kondisi awal demo. Untuk Backup &amp; Restore, gunakan menu <strong>Backup &amp; Restore</strong> di sidebar.</p>
         <div className="flex flex-wrap gap-2">
-          <button className="btn-danger" onClick={() => setConfirmReset(true)}>â†» Reset Data Demo</button>
+          <button className="btn-danger" onClick={() => setConfirmReset(true)}>Reset Data Demo</button>
         </div>
       </div>
 
