@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+﻿import { useRef, useState } from 'react'
 import PageHeader from '../components/PageHeader.jsx'
 import { ConfirmDialog } from '../components/Modal.jsx'
 import { useData } from '../context/DataContext.jsx'
@@ -17,6 +17,7 @@ export default function PengaturanPage() {
   const fileLogo = useRef(null)
   const fileTtdKepala = useRef(null)
   const fileTtdKetua = useRef(null)
+  const fileTtdPengawas = useRef(null)
   const fileStempelPokjawas = useRef(null)
   const fileStempelKemenag = useRef(null)
 
@@ -70,8 +71,8 @@ export default function PengaturanPage() {
       <PageHeader
         title="Pengaturan Aplikasi"
         description="Kelola identitas instansi, logo, bobot aspek KBC, dan backup data."
-        icon="⚙️"
-        actions={<button className="btn-primary" onClick={onSave}>💾 Simpan Pengaturan</button>}
+        icon="âš™ï¸"
+        actions={<button className="btn-primary" onClick={onSave}>ðŸ’¾ Simpan Pengaturan</button>}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
@@ -98,8 +99,8 @@ export default function PengaturanPage() {
             )}
             <input ref={fileLogo} type="file" accept="image/*" className="hidden" onChange={onLogo} />
             <div className="flex gap-2">
-              <button className="btn-ghost" onClick={() => fileLogo.current?.click()}>📂 Pilih Logo</button>
-              {form.logoDataUrl && <button className="btn-danger" onClick={() => upd('logoDataUrl', '')}>✕ Hapus</button>}
+              <button className="btn-ghost" onClick={() => fileLogo.current?.click()}>ðŸ“‚ Pilih Logo</button>
+              {form.logoDataUrl && <button className="btn-danger" onClick={() => upd('logoDataUrl', '')}>âœ• Hapus</button>}
             </div>
             <p className="text-xs text-slate-500 text-center">PNG/JPG, maks. 512 KB.</p>
           </div>
@@ -109,9 +110,9 @@ export default function PengaturanPage() {
       <div className="card-pad mb-4">
         <p className="font-semibold text-navy-900 mb-3">Tanda Tangan & Stempel</p>
         <p className="text-xs text-slate-500 mb-3">PNG/JPG, maksimal 512 KB. File tersimpan lokal di browser.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <ImageSetting label="Tanda Tangan Kepala Kemenag" value={form.ttdKepalaKemenag} fileRef={fileTtdKepala} onPick={(e) => onImageSetting(e, 'ttdKepalaKemenag', 'Tanda tangan Kepala Kemenag')} onClear={() => upd('ttdKepalaKemenag', '')} />
-          <ImageSetting label="Tanda Tangan Ketua Pokjawas" value={form.ttdKetuaPokjawas} fileRef={fileTtdKetua} onPick={(e) => onImageSetting(e, 'ttdKetuaPokjawas', 'Tanda tangan Ketua Pokjawas')} onClear={() => upd('ttdKetuaPokjawas', '')} />
+          <ImageSetting label="Tanda Tangan Ketua Pokjawas" value={form.ttdKetuaPokjawas} fileRef={fileTtdKetua} onPick={(e) => onImageSetting(e, 'ttdKetuaPokjawas', 'Tanda tangan Ketua Pokjawas')} onClear={() => upd('ttdKetuaPokjawas', '')} />`n          <ImageSetting label="Tanda Tangan Pengawas Pendamping" value={form.ttdPengawas} fileRef={fileTtdPengawas} onPick={(e) => onImageSetting(e, 'ttdPengawas', 'Tanda tangan Pengawas Pendamping')} onClear={() => upd('ttdPengawas', '')} />
           <ImageSetting label="Stempel Pokjawas" value={form.stempelPokjawas} fileRef={fileStempelPokjawas} onPick={(e) => onImageSetting(e, 'stempelPokjawas', 'Stempel Pokjawas')} onClear={() => upd('stempelPokjawas', '')} />
           <ImageSetting label="Stempel Kemenag" value={form.stempelKemenag} fileRef={fileStempelKemenag} onPick={(e) => onImageSetting(e, 'stempelKemenag', 'Stempel Kemenag')} onClear={() => upd('stempelKemenag', '')} />
         </div>
@@ -140,7 +141,7 @@ export default function PengaturanPage() {
       {LOCAL_ONLY_MODE && SUPABASE_ENABLED && (
         <div className="card-pad mb-4 border-2 border-amber-200 bg-amber-50/40">
           <div className="flex items-start gap-3">
-            <span className="text-2xl">📥</span>
+            <span className="text-2xl">ðŸ“¥</span>
             <div className="flex-1">
               <p className="font-semibold text-navy-900">Migrasi Data dari Supabase</p>
               <p className="text-sm text-slate-600 mt-1">
@@ -148,11 +149,11 @@ export default function PengaturanPage() {
               </p>
               <div className="flex gap-2 mt-3">
                 <button className="btn-toska" onClick={onMigrateFromSupabase} disabled={migrating}>
-                  {migrating ? 'Mengambil data…' : '⬇ Tarik Data dari Supabase'}
+                  {migrating ? 'Mengambil dataâ€¦' : 'â¬‡ Tarik Data dari Supabase'}
                 </button>
               </div>
               <p className="text-xs text-amber-700 mt-2">
-                ⚠️ Setelah migrasi, data lokal saat ini akan diganti dengan data dari Supabase. Backup dulu kalau ada perubahan yang mau dipertahankan.
+                âš ï¸ Setelah migrasi, data lokal saat ini akan diganti dengan data dari Supabase. Backup dulu kalau ada perubahan yang mau dipertahankan.
               </p>
             </div>
           </div>
@@ -163,7 +164,7 @@ export default function PengaturanPage() {
         <p className="font-semibold text-navy-900 mb-3">Reset Data Demo</p>
         <p className="text-sm text-slate-600 mb-3">Kembalikan seluruh data ke kondisi awal demo. Untuk Backup &amp; Restore, gunakan menu <strong>Backup &amp; Restore</strong> di sidebar.</p>
         <div className="flex flex-wrap gap-2">
-          <button className="btn-danger" onClick={() => setConfirmReset(true)}>↻ Reset Data Demo</button>
+          <button className="btn-danger" onClick={() => setConfirmReset(true)}>â†» Reset Data Demo</button>
         </div>
       </div>
 
@@ -206,7 +207,7 @@ function ImageSetting({ label, value, fileRef, onPick, onClear }) {
       </div>
       <input ref={fileRef} type="file" accept="image/png,image/jpeg" className="hidden" onChange={onPick} />
       <div className="flex gap-2">
-        <button type="button" className="btn-ghost text-xs" onClick={() => fileRef.current?.click()}>📂 Upload</button>
+        <button type="button" className="btn-ghost text-xs" onClick={() => fileRef.current?.click()}>ðŸ“‚ Upload</button>
         {value && <button type="button" className="btn-danger text-xs" onClick={onClear}>Hapus</button>}
       </div>
     </div>
@@ -221,3 +222,6 @@ function kapitalize(s) {
   if (!s) return s
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
+
+
+

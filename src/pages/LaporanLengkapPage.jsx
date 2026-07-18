@@ -2,11 +2,11 @@
 import { useAuth } from '../context/AuthContext.jsx'
 import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolver.js'
 
-function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-5' }) {
+function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-12' }) {
   return (
-    <div className={`h-24 flex items-center justify-center overflow-visible ${groupShift}`}>
-      {seal && <img src={seal} alt="Stempel" className="relative z-10 w-24 h-24 object-contain opacity-85" />}
-      {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-44 h-24 object-contain object-left mix-blend-multiply`} />}
+    <div className={`h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
+      {seal && <img src={seal} alt="Stempel" className="relative z-10 w-28 h-28 object-contain opacity-85" />}
+      {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-40 h-20 object-contain object-left mix-blend-multiply`} />}
     </div>
   )
 }
@@ -83,7 +83,7 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
-                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} signatureShift="-ml-16" />
+                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} signatureShift="-ml-12" />
                     <p className="border-t border-slate-300 pt-2 inline-block px-8">
                       {settings.kepalaKemenag || '____________________'}
                     </p>
@@ -116,7 +116,7 @@ export default function LaporanLengkapPage() {
                   <div className="text-center col-span-2 mt-4">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
-                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} signatureShift="-ml-16" />
+                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} signatureShift="-ml-12" />
                     <p className="inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                   </div>
@@ -704,4 +704,5 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
