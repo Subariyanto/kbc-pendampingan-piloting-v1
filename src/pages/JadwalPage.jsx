@@ -193,6 +193,7 @@ export default function JadwalPage() {
               nipPengawas={pengawasTtd?.nip}
               namaLengkapPengawas={pengawasTtd?.namaLengkap}
               align="center-right"
+              signature={state.settings.ttdPengawas || pengawasTtd?.ttdPengawas || pengawasTtd?.signatureDataUrl || pengawasTtd?.ttd}
             />
           </div>
         </Modal>

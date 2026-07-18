@@ -130,7 +130,7 @@ export default function TindakLanjutPage() {
                 ))}
               </tbody>
             </table>
-            <PrintSignature settings={state.settings} namaPengawas={pengawasTtd?.nama} nipPengawas={pengawasTtd?.nip} namaLengkapPengawas={pengawasTtd?.namaLengkap} />
+            <PrintSignature settings={state.settings} namaPengawas={pengawasTtd?.nama} nipPengawas={pengawasTtd?.nip} namaLengkapPengawas={pengawasTtd?.namaLengkap} signature={state.settings.ttdPengawas || pengawasTtd?.ttdPengawas || pengawasTtd?.signatureDataUrl || pengawasTtd?.ttd} />
           </div>
         </Modal>
       )}
