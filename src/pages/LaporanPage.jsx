@@ -120,6 +120,8 @@ export default function LaporanPage() {
     }
     const ids = Array.from(new Set(filteredPendampingan.map((p) => p.pengawasId).filter(Boolean)))
     if (ids.length === 1) return state.pengawas.find((p) => p.id === ids[0]) || null
+    // Jika hanya ada satu pengawas aktif, gunakan otomatis.
+    if (state.pengawas.length === 1) return state.pengawas[0]
     // Fallback ke user login
     return resolvePengawasFromUser(user, state.pengawas)
   }, [filterPengawas, filterMadrasah, jenis, filteredPendampingan, state.pengawas, state.madrasah, user])
@@ -258,9 +260,9 @@ export default function LaporanPage() {
 
         <PrintSignature
           settings={state.settings}
-          namaPengawas={pengawasTtd?.nama || '____________________'}
-          nipPengawas={pengawasTtd?.nip}
-          namaLengkapPengawas={pengawasTtd?.namaLengkap}
+          namaPengawas={pengawasTtd?.nama || pengawasTtd?.namaLengkap || '____________________'}
+          nipPengawas={pengawasTtd?.nip || ''}
+          namaLengkapPengawas={pengawasTtd?.namaLengkap || pengawasTtd?.nama || ''}
           signature={state.settings.ttdPengawas}
         />
         <p className="mt-4 text-xs text-slate-500">Dicetak {formatDateLong(new Date())}</p>
