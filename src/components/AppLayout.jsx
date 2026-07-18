@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { to: '/laporan-lengkap', label: 'Finalisasi / Laporan Pendukung MAGIS', icon: 'report', roles: ALL_ROLES },
   { to: '/panduan', label: 'Panduan Penggunaan', icon: 'book', roles: ADMIN_PENGAWAS },
   { to: '/backup', label: 'Backup & Restore', icon: 'backup', roles: ADMIN_PENGAWAS },
-  { to: '/pengaturan', label: 'Pengaturan / Data Utama', icon: 'settings', roles: ADMIN_PENGAWAS },
+  { to: '/pengaturan', label: 'Data Utama', icon: 'settings', roles: ADMIN_PENGAWAS },
   { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: 'key', roles: ['admin'] }
 ]
 export default function AppLayout({ children }) {
