@@ -261,6 +261,7 @@ export default function LaporanPage() {
           namaPengawas={pengawasTtd?.nama || '____________________'}
           nipPengawas={pengawasTtd?.nip}
           namaLengkapPengawas={pengawasTtd?.namaLengkap}
+          signature={state.settings.ttdPengawas}
         />
         <p className="mt-4 text-xs text-slate-500">Dicetak {formatDateLong(new Date())}</p>
       </div>
