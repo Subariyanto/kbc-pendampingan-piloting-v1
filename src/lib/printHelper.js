@@ -132,14 +132,19 @@ export function printPrintArea({ title = 'Cetak' } = {}) {
     doc.write(`<!doctype html><html><head><base href="${document.baseURI}"><title>${title}</title>${styles}<style>@page{margin:10mm}body{margin:0;background:#fff}.print-area{display:block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}</style></head><body>${el.outerHTML}</body></html>`)
     doc.close()
 
-    frame.onload = async () => {
+    const doPrint = async () => {
+      if (frame.dataset.printed) return
+      frame.dataset.printed = '1'
       try {
         await frame.contentDocument.fonts?.ready
         await Promise.all([...frame.contentDocument.images].map((img) => img.complete ? Promise.resolve() : new Promise((resolve) => { img.onload = img.onerror = resolve })))
       } catch {}
       frame.contentWindow.focus()
       frame.contentWindow.print()
-      setTimeout(() => frame.remove(), 1000)
+      setTimeout(() => frame.remove(), 3000)
     }
+    // about:blank iframe may finish loading before onload is attached.
+    if (doc.readyState === 'complete') setTimeout(doPrint, 300)
+    else frame.onload = () => setTimeout(doPrint, 300)
   })
 }

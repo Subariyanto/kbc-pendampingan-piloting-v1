@@ -546,7 +546,7 @@ function PrintModal({ item, mode, settings, instrumen, madrasah, pengawas, user,
           </div>
         )}
 
-        <SingleSignature tempat="Jember" tanggal={item.tanggal} namaPengawas={pengawasNama} nipPengawas={pengawasNip} namaLengkap={pengawasNamaLengkap} signature={settings?.ttdPengawas} />
+        <SingleSignature tempat="Jember" tanggal={item.tanggal} namaPengawas={pengawasNama} nipPengawas={pengawasNip} namaLengkap={pengawasNamaLengkap} signature={settings?.ttdPengawas || resolvedPengawas?.ttdPengawas || resolvedPengawas?.signatureDataUrl || resolvedPengawas?.ttd} />
       </div>
     </Modal>
   )
