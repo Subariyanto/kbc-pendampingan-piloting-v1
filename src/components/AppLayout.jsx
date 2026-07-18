@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: 'school', roles: ALL_ROLES },
   { to: '/pengawas', label: 'Pengawas Pendamping', icon: 'person', roles: ADMIN_PENGAWAS },
   { to: '/program-pendampingan', label: 'Rencana / Program Pendampingan', icon: 'plan', roles: ALL_ROLES },
-  { to: '/jadwal', label: 'Kegiatan / Jadwal Pendampingan', icon: 'calendar', roles: ALL_ROLES },
+  { to: '/jadwal', label: 'Jadwal Pendampingan', icon: 'calendar', roles: ALL_ROLES },
   { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: 'check', roles: ALL_ROLES },
   { to: '/pendampingan', label: 'Refleksi Kondisi Madrasah', icon: 'note', roles: ALL_ROLES },
   { to: '/eviden', label: 'Dokumentasi / Eviden KBC', icon: 'file', roles: ALL_ROLES },
