@@ -4,9 +4,9 @@ import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolve
 
 function SignatureVisual({ signature, seal }) {
   return (
-    <div className="signature-layer relative z-0 h-28 mt-1 mx-auto max-w-xs isolate">
-      {seal && <img src={seal} alt="Stempel" className="absolute z-0 w-32 h-32 object-contain opacity-85 mix-blend-multiply left-[38%] -translate-x-1/2 -top-8" />}
-      {signature && <img src={signature} alt="Tanda tangan" className="absolute z-10 w-48 h-24 object-contain object-center mix-blend-multiply left-[58%] -translate-x-1/2 -top-4" />}
+    <div className="signature-layer relative z-0 h-28 mt-1 mx-auto max-w-xs">
+      {seal && <img src={seal} alt="Stempel" className="absolute z-0 w-32 h-32 object-contain opacity-85 mix-blend-multiply left-[38%] -translate-x-1/2 -top-2" />}
+      {signature && <img src={signature} alt="Tanda tangan" className="absolute z-10 w-48 h-24 object-contain object-center mix-blend-multiply left-[58%] -translate-x-1/2 top-2" />}
     </div>
   )
 }
