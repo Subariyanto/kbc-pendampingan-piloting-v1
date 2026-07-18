@@ -91,7 +91,7 @@ export default function AppLayout({ children }) {
               <p className="font-medium text-slate-700">{user?.nama}</p>
               <p>{ROLE_LABELS[user?.role] || user?.role}</p>
             </div>
-            <button onClick={onLogout} className="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-600 text-xs font-medium" title="Keluar">Keluar</button>
+            <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-slate-600" title="Keluar" aria-label="Keluar"><LogoutIcon /></button>
           </div>
         </header>
 
@@ -115,7 +115,7 @@ export default function AppLayout({ children }) {
               <p className="text-[10px] text-slate-500">Pokjawas Jember</p>
             </div>
           </div>
-          <button onClick={onLogout} className="px-3 py-2 rounded-lg hover:bg-slate-100 text-slate-600 text-xs font-medium" aria-label="Keluar">Keluar</button>
+          <button onClick={onLogout} className="p-2 rounded-lg hover:bg-slate-100 text-slate-600" title="Keluar" aria-label="Keluar"><LogoutIcon /></button>
         </header>
 
         <main className="flex-1 px-4 lg:px-8 py-6 lg:py-8 max-w-[1400px] w-full mx-auto">
@@ -185,6 +185,10 @@ function UserBlock({ user, onLogout }) {
       </p>
     </div>
   )
+}
+
+function LogoutIcon() {
+  return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /></svg>
 }
 
 function Hamburger() {
