@@ -97,8 +97,8 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Pengawas Pendamping,</p>
-                    <p className="mt-16 inline-block px-8">{pengawasNamaLengkap}</p>
-                    <p>NIP. {pengawasNip}</p>
+                    <p className="mt-16 whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
+                    <p className="whitespace-nowrap">NIP. {pengawasNip}</p>
                   </div>
                   <div className="text-center col-span-2 mt-4">
                     <p>Mengetahui,</p>
