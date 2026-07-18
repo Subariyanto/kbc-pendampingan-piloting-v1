@@ -7,9 +7,9 @@ import { ROLE_LABELS, ROLES } from '../lib/constants.js'
 const ALL_ROLES = ['admin','pengawas','kepala_madrasah','viewer']
 const ADMIN_PENGAWAS = ['admin','pengawas']
 const NAV_ITEMS = [
-  { to: '/', label: 'Dashboard Pendampingan KBC', icon: 'dashboard', roles: ALL_ROLES },
+  { to: '/', label: 'Dasboard', icon: 'dashboard', roles: ALL_ROLES },
   { to: '/alur-pengawasan', label: 'Alur Pengawasan Digital', icon: 'flow', roles: ALL_ROLES },
-  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: 'school', roles: ALL_ROLES },
+  { to: '/madrasah', label: 'Madrasah Piloting KBC', icon: 'school', roles: ALL_ROLES },
   { to: '/pengawas', label: 'Pengawas Pendamping', icon: 'person', roles: ADMIN_PENGAWAS },
   { to: '/program-pendampingan', label: 'Program Pendampingan', icon: 'plan', roles: ALL_ROLES },
   { to: '/jadwal', label: 'Jadwal Pendampingan', icon: 'calendar', roles: ALL_ROLES },
