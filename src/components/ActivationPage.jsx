@@ -4,6 +4,27 @@ import { verifySignedCode } from '../lib/signedLicense.js'
 import { SUPABASE_ENABLED, supabase } from '../lib/supabase.js'
 
 const REGISTERED_USERS_KEY = 'kbc_registered_users_v1'
+const LICENSE_ROSTER_URL = `${import.meta.env.BASE_URL}data/registered-licenses.json`
+
+async function sha256(text) {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
+  return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function isRegisteredLicense(nama, code) {
+  const normalized = String(nama).trim().toLocaleLowerCase('id-ID').replace(/\s+/g, ' ')
+  const hash = await sha256(`${normalized}|${code}`)
+  const cached = JSON.parse(localStorage.getItem('kbc_license_roster_v1') || 'null')
+  try {
+    const res = await fetch(`${LICENSE_ROSTER_URL}?t=${Date.now()}`, { cache: 'no-store' })
+    if (!res.ok) throw new Error('Roster unavailable')
+    const roster = await res.json()
+    localStorage.setItem('kbc_license_roster_v1', JSON.stringify(roster))
+    return roster.hashes?.includes(hash) === true
+  } catch {
+    return cached?.hashes?.includes(hash) === true
+  }
+}
 
 // Simpan user ke registered list (nama+password, bisa login)
 function saveRegisteredUser(nama, password, role) {
@@ -46,6 +67,9 @@ export default function ActivationPage({ onActivated }) {
       } else {
         const r = await verifySignedCode(cleanCode)
         if (!r.valid) { setError(r.error || 'Kode tidak valid'); setLoading(false); return }
+        if (!(await isRegisteredLicense(cleanNama, cleanCode))) {
+          setError('Nama atau kode aktivasi tidak terdaftar'); setLoading(false); return
+        }
         tier = r.tier; label = r.label
         if (r.expiryDays > 0) exp = Date.now() + r.expiryDays * 86400000
       }
