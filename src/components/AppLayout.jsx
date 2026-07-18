@@ -133,10 +133,7 @@ export default function AppLayout({ children }) {
 function Brand({ settings }) {
   return (
     <div className="px-4 py-4 border-b border-white/10 text-center">
-      <div className="flex items-center justify-center gap-3 mb-2">
-        <img src={`${import.meta.env.BASE_URL}logo-kemenag.png`} alt="Logo Kementerian Agama" className="h-16 w-16 object-contain" />
-        <img src={`${import.meta.env.BASE_URL}logo-magis.png`} alt="Logo MAGIS" className="h-16 w-auto rounded bg-white/95 p-1" />
-      </div>
+      <img src={`${import.meta.env.BASE_URL}logo-magis.png`} alt="Logo MAGIS" className="mx-auto mb-2 h-16 w-auto rounded bg-white/95 p-1" />
       <p className="text-[10px] uppercase tracking-wider text-toska-200">Selaras dengan semangat pengawasan digital</p>
       <p className="text-sm font-serif font-semibold leading-tight">Pendampingan Piloting KBC</p>
       <p className="mt-1 text-[9px] text-slate-400">Aplikasi pendukung — bukan aplikasi resmi MAGIS</p>
@@ -199,6 +196,5 @@ function Hamburger() {
     </svg>
   )
 }
-
 
 
