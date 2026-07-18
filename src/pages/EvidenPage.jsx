@@ -134,6 +134,9 @@ export default function EvidenPage() {
 function FormEviden({ value, onSave, madrasahList }) {
   const [form, setForm] = useState(value)
   const upd = (k, v) => setForm((f) => ({ ...f, [k]: v }))
+  const madrasahNama = madrasahList.find((m) => m.id === form.madrasahId)?.nama || 'madrasah'
+  const isiJudulOtomatis = () => upd('judul', `${form.jenis} Implementasi KBC - ${madrasahNama}`)
+  const isiDeskripsiOtomatis = () => upd('deskripsi', `Eviden ${form.jenis} kegiatan implementasi Kurikulum Berbasis Cinta (KBC) di ${madrasahNama}.`)
   const submit = (e) => { e.preventDefault(); onSave(form) }
   return (
     <form id="form-eviden" onSubmit={submit} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -148,10 +151,13 @@ function FormEviden({ value, onSave, madrasahList }) {
           {JENIS_EVIDEN.map((j) => <option key={j}>{j}</option>)}
         </select>
       </Field>
-      <Field label="Judul" required><input className="input" value={form.judul} onChange={(e) => upd('judul', e.target.value)} required /></Field>
+      <div>
+        <div className="flex items-center justify-between mb-1"><label className="label mb-0">Judul <span className="text-rose-500">*</span></label><button type="button" className="text-xs text-toska-700 hover:underline" onClick={isiJudulOtomatis}>Isi otomatis</button></div>
+        <input className="input" value={form.judul} onChange={(e) => upd('judul', e.target.value)} required />
+      </div>
       <Field label="Tanggal Upload"><input className="input" type="date" value={form.tanggal} onChange={(e) => upd('tanggal', e.target.value)} /></Field>
       <div className="sm:col-span-2">
-        <label className="label">Deskripsi</label>
+        <div className="flex items-center justify-between mb-1"><label className="label mb-0">Deskripsi</label><button type="button" className="text-xs text-toska-700 hover:underline" onClick={isiDeskripsiOtomatis}>Isi otomatis</button></div>
         <textarea className="input" rows={2} value={form.deskripsi} onChange={(e) => upd('deskripsi', e.target.value)} />
       </div>
       <div className="sm:col-span-2">
