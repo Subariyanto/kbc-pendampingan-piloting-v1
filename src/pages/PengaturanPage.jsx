@@ -112,7 +112,8 @@ export default function PengaturanPage() {
         <p className="text-xs text-slate-500 mb-3">PNG/JPG, maksimal 512 KB. File tersimpan lokal di browser.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <ImageSetting label="Tanda Tangan Kepala Kemenag" value={form.ttdKepalaKemenag} fileRef={fileTtdKepala} onPick={(e) => onImageSetting(e, 'ttdKepalaKemenag', 'Tanda tangan Kepala Kemenag')} onClear={() => upd('ttdKepalaKemenag', '')} />
-          <ImageSetting label="Tanda Tangan Ketua Pokjawas" value={form.ttdKetuaPokjawas} fileRef={fileTtdKetua} onPick={(e) => onImageSetting(e, 'ttdKetuaPokjawas', 'Tanda tangan Ketua Pokjawas')} onClear={() => upd('ttdKetuaPokjawas', '')} />`n          <ImageSetting label="Tanda Tangan Pengawas Pendamping" value={form.ttdPengawas} fileRef={fileTtdPengawas} onPick={(e) => onImageSetting(e, 'ttdPengawas', 'Tanda tangan Pengawas Pendamping')} onClear={() => upd('ttdPengawas', '')} />
+          <ImageSetting label="Tanda Tangan Ketua Pokjawas" value={form.ttdKetuaPokjawas} fileRef={fileTtdKetua} onPick={(e) => onImageSetting(e, 'ttdKetuaPokjawas', 'Tanda tangan Ketua Pokjawas')} onClear={() => upd('ttdKetuaPokjawas', '')} />
+          <ImageSetting label="Tanda Tangan Pengawas Pendamping" value={form.ttdPengawas} fileRef={fileTtdPengawas} onPick={(e) => onImageSetting(e, 'ttdPengawas', 'Tanda tangan Pengawas Pendamping')} onClear={() => upd('ttdPengawas', '')} />
           <ImageSetting label="Stempel Pokjawas" value={form.stempelPokjawas} fileRef={fileStempelPokjawas} onPick={(e) => onImageSetting(e, 'stempelPokjawas', 'Stempel Pokjawas')} onClear={() => upd('stempelPokjawas', '')} />
           <ImageSetting label="Stempel Kemenag" value={form.stempelKemenag} fileRef={fileStempelKemenag} onPick={(e) => onImageSetting(e, 'stempelKemenag', 'Stempel Kemenag')} onClear={() => upd('stempelKemenag', '')} />
         </div>
@@ -207,7 +208,7 @@ function ImageSetting({ label, value, fileRef, onPick, onClear }) {
       </div>
       <input ref={fileRef} type="file" accept="image/png,image/jpeg" className="hidden" onChange={onPick} />
       <div className="flex gap-2">
-        <button type="button" className="btn-ghost text-xs" onClick={() => fileRef.current?.click()}>ðŸ“‚ Upload</button>
+        <button type="button" className="btn-ghost text-xs" onClick={() => fileRef.current?.click()}>Upload</button>
         {value && <button type="button" className="btn-danger text-xs" onClick={onClear}>Hapus</button>}
       </div>
     </div>
