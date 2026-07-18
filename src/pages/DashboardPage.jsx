@@ -65,6 +65,15 @@ export default function DashboardPage() {
       }))
   }, [scope, state.pengawas])
 
+  const workflow = [
+    { label: 'Refleksi Kondisi', path: '/pendampingan', count: scope.pendampingan.length },
+    { label: 'Rencana Kerja', path: '/program-pendampingan', count: scope.jadwal.length },
+    { label: 'Kegiatan Supervisi', path: '/jadwal', count: stats.berjalan },
+    { label: 'Dokumentasi / Eviden', path: '/eviden', count: scope.eviden.length },
+    { label: 'Tindak Lanjut', path: '/tindak-lanjut', count: scope.tindakLanjut.length },
+    { label: 'Finalisasi / Laporan', path: '/laporan', count: stats.selesai }
+  ]
+
   return (
     <>
       <TrialBanner />
@@ -73,6 +82,20 @@ export default function DashboardPage() {
         description="Ringkasan progres pendampingan madrasah piloting Kurikulum Berbasis Cinta."
         icon="📊"
       />
+
+      <div className="card-pad mb-6">
+        <p className="font-semibold text-navy-900">Alur Supervisi KBC v1</p>
+        <p className="text-xs text-slate-500 mb-4">Refleksi → Rencana → Kegiatan → Eviden → Tindak Lanjut → Laporan</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2">
+          {workflow.map((step, index) => (
+            <Link key={step.path} to={step.path} className="rounded-lg border border-slate-200 p-3 hover:border-toska-400 hover:bg-toska-50 transition">
+              <span className="w-6 h-6 rounded-full bg-navy-900 text-white text-xs inline-flex items-center justify-center">{index + 1}</span>
+              <p className="text-sm font-medium text-navy-900 mt-2">{step.label}</p>
+              <p className="text-xl font-semibold text-toska-700">{step.count}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard icon="🏫" label="Madrasah Piloting" value={stats.totalMadrasah} hint="Madrasah aktif binaan" tone="navy" />
