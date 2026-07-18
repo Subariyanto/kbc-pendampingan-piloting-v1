@@ -4,7 +4,7 @@ import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolve
 
 function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-12' }) {
   return (
-    <div className={`h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
+    <div className={`signature-layer h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
       {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85 mix-blend-multiply" />}
       {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-40 h-20 object-contain object-left mix-blend-multiply`} />}
     </div>
@@ -80,7 +80,7 @@ export default function LaporanLengkapPage() {
             <div className="mt-12 grid grid-cols-2 gap-8">
               {dibuatKetuaPokjawas ? (
                 <>
-                  <div className="text-center">
+                  <div className="signature-block text-center">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
                     <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} groupShift="-translate-x-12" signatureShift="-ml-12" />
@@ -704,6 +704,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
