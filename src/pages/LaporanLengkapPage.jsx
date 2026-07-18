@@ -5,7 +5,7 @@ import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolve
 function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-12' }) {
   return (
     <div className={`h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
-      {seal && <img src={seal} alt="Stempel" className="relative z-10 w-28 h-28 object-contain opacity-60" />}
+      {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85" />}
       {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-40 h-20 object-contain object-left mix-blend-multiply`} />}
     </div>
   )
@@ -84,7 +84,7 @@ export default function LaporanLengkapPage() {
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
                     <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} groupShift="-translate-x-12" signatureShift="-ml-12" />
-                    <p className="border-t border-slate-300 pt-2 inline-block px-8">
+                    <p className="relative z-30 border-t border-slate-300 pt-2 inline-block px-8">
                       {settings.kepalaKemenag || '____________________'}
                     </p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
@@ -93,7 +93,7 @@ export default function LaporanLengkapPage() {
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Ketua Pokjawas,</p>
                     <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="-translate-x-12" />
-                    <p className="border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
+                    <p className="relative z-30 border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
                     <p>NIP. {ketuaNip}</p>
                   </div>
                 </>
@@ -103,21 +103,21 @@ export default function LaporanLengkapPage() {
                     <p>Mengetahui,</p>
                     <p>Ketua Pokjawas,</p>
                     <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="-translate-x-12" />
-                    <p className="inline-block px-8">{settings.ketuaPokjawas}</p>
+                    <p className="relative z-30 inline-block px-8">{settings.ketuaPokjawas}</p>
                     <p>NIP. {settings.nipKetua}</p>
                   </div>
                   <div className="text-center">
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Pengawas Pendamping,</p>
                     <SignatureVisual signature={settings.ttdPengawas} />
-                    <p className="whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
-                    <p className="whitespace-nowrap">NIP. {pengawasNip}</p>
+                    <p className="relative z-30 whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
+                    <p className="relative z-30 whitespace-nowrap">NIP. {pengawasNip}</p>
                   </div>
                   <div className="text-center col-span-2 mt-4">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
                     <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} groupShift="-translate-x-12" signatureShift="-ml-12" />
-                    <p className="inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
+                    <p className="relative z-30 inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
                     <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                   </div>
                 </>
@@ -704,6 +704,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
