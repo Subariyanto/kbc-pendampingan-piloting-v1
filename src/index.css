@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-navy-900;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-navy-900 text-white hover:bg-navy-800 focus:ring-navy-700;
+  }
+  .btn-toska {
+    @apply btn bg-toska-600 text-white hover:bg-toska-700 focus:ring-toska-500;
+  }
+  .btn-gold {
+    @apply btn bg-gold-400 text-navy-900 hover:bg-gold-300 focus:ring-gold-500;
+  }
+  .btn-ghost {
+    @apply btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 focus:ring-slate-300;
+  }
+  .btn-danger {
+    @apply btn bg-rose-600 text-white hover:bg-rose-700 focus:ring-rose-500;
+  }
+  .btn-sm {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+  .btn-xs {
+    @apply px-2 py-1 text-xs gap-1 rounded-md;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-toska-500 focus:outline-none focus:ring-2 focus:ring-toska-100;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-card border border-slate-100;
+  }
+  .card-pad {
+    @apply card p-5;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+  .table-clean {
+    @apply w-full text-sm;
+  }
+  .table-clean thead th {
+    @apply bg-slate-50 text-left px-3 py-2 font-medium text-slate-600 border-b border-slate-200 text-xs uppercase tracking-wide;
+  }
+  .table-clean tbody td {
+    @apply px-3 py-2 border-b border-slate-100 text-slate-700 align-top;
+  }
+  .table-clean tbody tr:hover {
+    @apply bg-slate-50/60;
+  }
+  .stat-card {
+    @apply card-pad flex items-start gap-4;
+  }
+}
+
+/* Print rules */
+@media print {
+  /* Reset background & color global — TIDAK override elemen di print-area */
+  body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+
+  /* Sembunyikan elemen UI yang bukan dokumen */
+  aside, nav, header, .topbar, .no-print { display: none !important; }
+  /* Tombol di mana pun jangan ikut tercetak (kecuali tombol di dalam print-area, jarang dipakai) */
+  button { display: none !important; }
+
+  /* Hilangkan overlay modal & framing-nya supaya konten naik ke aliran normal */
+  .fixed { position: static !important; inset: auto !important; padding: 0 !important; background: transparent !important; }
+  .fixed > div[aria-hidden="true"] { display: none !important; } /* backdrop */
+  /* Modal box: hilangkan max-height/overflow agar paginasi mengalir natural */
+  .fixed > .relative {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-height: none !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .fixed > .relative > div:first-child { display: none !important; } /* modal header bar */
+  .fixed > .relative > div { overflow: visible !important; max-height: none !important; }
+
+  /* Print-area: full width, no absolute positioning (biar paginate normal) */
+  .print-area {
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    border: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Preserve backgrounds for score boxes, badges, headers in print */
+  .print-area * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Font tabel cetak: 12pt konsisten semua laporan */
+  .print-area table {
+    font-size: 12pt !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .print-area table th,
+  .print-area table td {
+    font-size: 12pt !important;
+    padding: 4px 6px !important;
+    vertical-align: top !important;
+    line-height: 1.4 !important;
+  }
+  .print-area table thead th {
+    font-weight: 600 !important;
+    background: #f1f5f9 !important;
+    border-bottom: 1.5pt solid #334155 !important;
+  }
+  .print-area table tbody td {
+    border-bottom: 0.5pt solid #cbd5e1 !important;
+  }
+  .print-area p, .print-area li, .print-area span {
+    font-size: 12pt !important;
+  }
+  .print-area h1, .print-area h2 { font-size: 14pt !important; }
+  .print-area h3, .print-area h4 { font-size: 12pt !important; }
+
+  /* Cegah cut di tengah */
+  table, tr, td, th { page-break-inside: avoid; }
+  h1, h2, h3, h4 { page-break-after: avoid; }
+
+  /* Paksa mulai halaman baru untuk tiap bagian dokumen (Cover, Kata Pengantar, Daftar Isi, BAB, Lampiran) */
+  .print-page-break { page-break-before: always; break-before: page; }
+
+  /* Margin halaman ringkas; orientasi/ukuran ikut pilihan user di dialog cetak */
+  @page { margin: 10mm; }
+}
+
+.program-editor{display:grid;grid-template-columns:280px minmax(0,1fr);gap:1rem;align-items:start}.program-nav{position:sticky;top:1rem;max-height:calc(100vh - 2rem);overflow:auto}.program-nav-item{display:flex;width:100%;gap:.65rem;text-align:left;padding:.55rem .65rem;border-radius:.5rem;font-size:.78rem;color:#475569}.program-nav-item span{flex:none;width:1.35rem;height:1.35rem;border-radius:999px;background:#e2e8f0;text-align:center;line-height:1.35rem}.program-nav-item:hover,.program-nav-item.active{background:#eef2ff;color:#1e3a8a}.program-nav-item.active{font-weight:600}.program-textarea{min-height:65vh;line-height:1.6;font-family:Georgia,'Times New Roman',serif}.program-document{max-width:210mm;margin:0 auto;background:#fff;color:#111;box-shadow:0 4px 20px #0002}.doc-page{padding:20mm;min-height:297mm;break-before:page;font-family:'Times New Roman',serif}.doc-page:first-child{break-before:auto}.doc-page h1{text-align:center;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:24px}.doc-page p{white-space:pre-wrap;text-align:justify;line-height:1.55;margin-bottom:12px;font-size:16px}.doc-table-text{border:1px solid #475569;padding:12px;white-space:pre-wrap;font-size:14px;line-height:1.5;margin:12px 0}.cover-page{display:flex;flex-direction:column;justify-content:center;text-align:center}.cover-page p{text-align:center}.print-only{position:absolute;left:-100000px;top:0}@media(max-width:800px){.program-editor{grid-template-columns:1fr}.program-nav{position:static;max-height:260px}}@media print{.program-document{box-shadow:none;max-width:none}.doc-page{padding:15mm}.print-only{position:static}}
