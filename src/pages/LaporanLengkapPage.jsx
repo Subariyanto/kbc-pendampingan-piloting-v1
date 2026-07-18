@@ -5,7 +5,7 @@ import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolve
 function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-12' }) {
   return (
     <div className={`signature-layer h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
-      {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85 mix-blend-multiply" />}
+      {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85" />}
       {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-40 h-20 object-contain object-left mix-blend-multiply`} />}
     </div>
   )
@@ -704,6 +704,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
