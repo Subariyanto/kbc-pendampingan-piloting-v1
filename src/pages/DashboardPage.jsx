@@ -82,6 +82,12 @@ export default function DashboardPage() {
         description="Ringkasan progres pendampingan madrasah piloting Kurikulum Berbasis Cinta."
         icon="📊"
       />
+      <section className="mb-6 overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-800 via-violet-700 to-fuchsia-600 p-5 text-white shadow-lg">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div><p className="text-xs font-semibold uppercase tracking-wider text-white/70">Pendampingan Digital Madrasah</p><h2 className="mt-1 text-2xl font-bold">Kurikulum Berbasis Cinta</h2><p className="mt-1 text-sm text-white/80">Monitoring progres, eviden, rekomendasi, tindak lanjut, dan laporan dalam satu alur.</p></div>
+          <img src={`${import.meta.env.BASE_URL}logo-magis.png`} alt="MAGIS — Madrasah Digital Supervision" className="h-20 w-auto rounded-xl bg-white p-2" />
+        </div>
+      </section>
       <section className="mb-6 rounded-xl border border-toska-200 bg-toska-50 p-4 text-sm leading-relaxed text-slate-700">
         <strong className="text-navy-900">Keterangan aplikasi.</strong> Aplikasi Pendampingan Madrasah Piloting KBC ini merupakan aplikasi pendukung bagi pengawas madrasah dalam melaksanakan pendampingan, monitoring, dokumentasi eviden, rekomendasi, dan tindak lanjut implementasi Kurikulum Berbasis Cinta. Aplikasi ini disusun agar selaras dengan semangat pengawasan digital madrasah melalui MAGIS, namun tidak menggantikan aplikasi resmi Kementerian Agama.
       </section>
