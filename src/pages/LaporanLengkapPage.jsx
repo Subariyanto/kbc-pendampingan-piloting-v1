@@ -2,11 +2,11 @@
 import { useAuth } from '../context/AuthContext.jsx'
 import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolver.js'
 
-function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-12' }) {
+function SignatureVisual({ signature, seal }) {
   return (
-    <div className={`signature-layer relative z-0 h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
-      {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85 mix-blend-multiply" />}
-      {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-40 h-20 object-contain object-left mix-blend-multiply`} />}
+    <div className="signature-layer relative z-0 h-24 mt-1">
+      {seal && <img src={seal} alt="Stempel" className="absolute z-0 w-24 h-24 object-contain opacity-80 mix-blend-multiply left-1/2 -translate-x-1/2 -top-1" />}
+      {signature && <img src={signature} alt="Tanda tangan" className="absolute z-10 w-36 h-20 object-contain mix-blend-multiply left-1/2 -translate-x-1/2 top-1" />}
     </div>
   )
 }
@@ -77,14 +77,14 @@ export default function LaporanLengkapPage() {
               Tahun Pelajaran {settings.tahunPelajaran}.
             </p>
             
-            <div className="mt-12 grid grid-cols-2 gap-8">
+            <div className="mt-10 mb-14 grid grid-cols-2 gap-x-12 gap-y-8">
               {dibuatKetuaPokjawas ? (
                 <>
                   <div className="signature-block text-center">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
-                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} groupShift="-translate-x-12" signatureShift="-ml-12" />
-                    <div className="relative z-30 -mt-5">
+                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} />
+                    <div className="relative z-30">
                       <p className="border-t border-slate-300 pt-2 inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
                       <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                     </div>
@@ -92,8 +92,8 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Ketua Pokjawas,</p>
-                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="translate-x-4" />
-                    <div className="relative z-30 -mt-5">
+                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} />
+                    <div className="relative z-30">
                       <p className="border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
                       <p>NIP. {ketuaNip}</p>
                     </div>
@@ -104,8 +104,8 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>Mengetahui,</p>
                     <p>Ketua Pokjawas,</p>
-                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="translate-x-4" />
-                    <div className="relative z-30 -mt-5">
+                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} />
+                    <div className="relative z-30">
                       <p className="inline-block px-8">{settings.ketuaPokjawas}</p>
                       <p>NIP. {settings.nipKetua}</p>
                     </div>
@@ -114,7 +114,7 @@ export default function LaporanLengkapPage() {
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Pengawas Pendamping,</p>
                     <SignatureVisual signature={settings.ttdPengawas} />
-                    <div className="relative z-30 -mt-5">
+                    <div className="relative z-30">
                       <p className="whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
                       <p className="whitespace-nowrap">NIP. {pengawasNip}</p>
                     </div>
@@ -122,8 +122,8 @@ export default function LaporanLengkapPage() {
                   <div className="text-center col-span-2 mt-4">
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
-                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} groupShift="-translate-x-12" signatureShift="-ml-12" />
-                    <div className="relative z-30 -mt-5">
+                    <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} />
+                    <div className="relative z-30">
                       <p className="inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
                       <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                     </div>
@@ -712,6 +712,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
