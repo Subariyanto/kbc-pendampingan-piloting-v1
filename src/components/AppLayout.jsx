@@ -7,23 +7,23 @@ import { ROLE_LABELS, ROLES } from '../lib/constants.js'
 const ALL_ROLES = ['admin','pengawas','kepala_madrasah','viewer']
 const ADMIN_PENGAWAS = ['admin','pengawas']
 const NAV_ITEMS = [
-  { to: '/', label: 'Dashboard Pendampingan KBC', icon: '01', roles: ALL_ROLES },
-  { to: '/alur-pengawasan', label: 'Alur Pengawasan Digital', icon: '02', roles: ALL_ROLES },
-  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: '03', roles: ALL_ROLES },
-  { to: '/pengawas', label: 'Pengawas Pendamping', icon: '04', roles: ADMIN_PENGAWAS },
-  { to: '/program-pendampingan', label: 'Rencana / Program Pendampingan', icon: '05', roles: ALL_ROLES },
-  { to: '/jadwal', label: 'Kegiatan / Jadwal Pendampingan', icon: '06', roles: ALL_ROLES },
-  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: '07', roles: ALL_ROLES },
-  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: '08', roles: ALL_ROLES },
-  { to: '/eviden', label: 'Dokumentasi / Eviden KBC', icon: '09', roles: ALL_ROLES },
-  { to: '/contoh-eviden', label: 'Contoh Eviden', icon: '10', roles: ADMIN_PENGAWAS },
-  { to: '/tindak-lanjut', label: 'Rekomendasi & Tindak Lanjut', icon: '11', roles: ALL_ROLES },
-  { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: '12', roles: ADMIN_PENGAWAS },
-  { to: '/laporan-lengkap', label: 'Finalisasi / Laporan Pendukung MAGIS', icon: '13', roles: ALL_ROLES },
-  { to: '/panduan', label: 'Panduan Penggunaan', icon: '14', roles: ADMIN_PENGAWAS },
-  { to: '/backup', label: 'Backup & Restore', icon: '15', roles: ADMIN_PENGAWAS },
-  { to: '/pengaturan', label: 'Pengaturan / Data Utama', icon: '16', roles: ADMIN_PENGAWAS },
-  { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: '17', roles: ['admin'] }
+  { to: '/', label: 'Dashboard Pendampingan KBC', icon: 'dashboard', roles: ALL_ROLES },
+  { to: '/alur-pengawasan', label: 'Alur Pengawasan Digital', icon: 'flow', roles: ALL_ROLES },
+  { to: '/madrasah', label: 'Madrasah Binaan Piloting KBC', icon: 'school', roles: ALL_ROLES },
+  { to: '/pengawas', label: 'Pengawas Pendamping', icon: 'person', roles: ADMIN_PENGAWAS },
+  { to: '/program-pendampingan', label: 'Rencana / Program Pendampingan', icon: 'plan', roles: ALL_ROLES },
+  { to: '/jadwal', label: 'Kegiatan / Jadwal Pendampingan', icon: 'calendar', roles: ALL_ROLES },
+  { to: '/instrumen', label: 'Instrumen Monitoring KBC', icon: 'check', roles: ALL_ROLES },
+  { to: '/pendampingan', label: 'Catatan Hasil Pendampingan', icon: 'note', roles: ALL_ROLES },
+  { to: '/eviden', label: 'Dokumentasi / Eviden KBC', icon: 'file', roles: ALL_ROLES },
+  { to: '/contoh-eviden', label: 'Contoh Eviden', icon: 'folder', roles: ADMIN_PENGAWAS },
+  { to: '/tindak-lanjut', label: 'Rekomendasi & Tindak Lanjut', icon: 'target', roles: ALL_ROLES },
+  { to: '/laporan', label: 'Capaian Madrasah Piloting', icon: 'chart', roles: ADMIN_PENGAWAS },
+  { to: '/laporan-lengkap', label: 'Finalisasi / Laporan Pendukung MAGIS', icon: 'report', roles: ALL_ROLES },
+  { to: '/panduan', label: 'Panduan Penggunaan', icon: 'book', roles: ADMIN_PENGAWAS },
+  { to: '/backup', label: 'Backup & Restore', icon: 'backup', roles: ADMIN_PENGAWAS },
+  { to: '/pengaturan', label: 'Pengaturan / Data Utama', icon: 'settings', roles: ADMIN_PENGAWAS },
+  { to: '/kode-aktivasi', label: 'Kode Aktivasi', icon: 'key', roles: ['admin'] }
 ]
 export default function AppLayout({ children }) {
   const { user, logout } = useAuth()
@@ -141,6 +141,11 @@ function Brand({ settings }) {
   )
 }
 
+function MenuIcon({ name }) {
+  const paths = { dashboard: 'M3 13h7V3H3v10Zm11 8h7V3h-7v18ZM3 21h7v-4H3v4Zm11-4h7v-4h-7v4Z', flow: 'M4 5h5v5H4V5Zm11 9h5v5h-5v-5ZM9 7h6m-3 0v7', school: 'm3 10 9-6 9 6-9 6-9-6Zm3 3v5h12v-5M12 16v5', person: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0', plan: 'M5 4h14v16H5zM8 8h8M8 12h8M8 16h5', calendar: 'M5 4h14v16H5zM8 2v4m8-4v4M5 9h14', check: 'M5 12l4 4L19 6', note: 'M5 4h14v16H5zM8 9h8M8 13h8M8 17h5', file: 'M6 3h8l4 4v14H6zM14 3v5h5', folder: 'M3 6h7l2 2h9v11H3z', target: 'M12 12m-8 0a8 8 0 1 0 16 0a8 8 0 1 0-16 0M12 12m-3 0a3 3 0 1 0 6 0', chart: 'M5 20V10m5 10V4m5 16v-7m5 7V7', report: 'M5 3h14v18H5zM8 8h8M8 12h8M8 16h5', book: 'M4 5a3 3 0 0 1 3-2h13v17H7a3 3 0 0 0-3 2z', backup: 'M12 3v12m0 0 5-5m-5 5-5-5M5 21h14', settings: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0-5v3m0 12v3M3 12h3m12 0h3', key: 'M14 7a5 5 0 1 0-4 8l7 7 3-3-2-2 2-2-3-3a5 5 0 0 0-3-5Z' }
+  return <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={paths[name] || paths.note} /></svg>
+}
+
 function SidebarItem({ to, icon, label, onClick }) {
   return (
     <NavLink
@@ -155,7 +160,7 @@ function SidebarItem({ to, icon, label, onClick }) {
         }`
       }
     >
-      <span className="text-base w-5 text-center">{icon}</span>
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 text-toska-200"><MenuIcon name={icon} /></span>
       <span>{label}</span>
     </NavLink>
   )
