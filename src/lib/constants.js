@@ -3,12 +3,16 @@ import { uid } from './utils.js'
 
 export const ROLES = {
   ADMIN: 'admin',
-  PENGAWAS: 'pengawas'
+  PENGAWAS: 'pengawas',
+  KEPALA_MADRASAH: 'kepala_madrasah',
+  VIEWER: 'viewer'
 }
 
 export const ROLE_LABELS = {
   admin: 'Admin',
-  pengawas: 'Pengawas Madrasah'
+  pengawas: 'Pengawas Madrasah',
+  kepala_madrasah: 'Kepala Madrasah',
+  viewer: 'Viewer / Pimpinan'
 }
 
 export const JENJANG_OPTIONS = ['RA', 'MI', 'MTs', 'MA', 'MAK']

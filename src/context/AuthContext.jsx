@@ -15,7 +15,9 @@ const OFFICIAL_DEMO_USERS = [
   { id: 'demo-kakankemenag', username: 'kakankemenag', password: 'KBCdemo2026', role: 'admin', nama: 'Kepala Kantor Kemenag' },
   { id: 'demo-kasipenmad', username: 'kasipenmad', password: 'KBCdemo2026', role: 'admin', nama: 'Kepala Seksi Pendidikan Madrasah' },
   { id: 'demo-ketuapokjawas', username: 'ketuapokjawas', password: 'KBCdemo2026', role: 'admin', nama: 'Ketua Pokjawas Madrasah' },
-  { id: 'demo-pengawas', username: 'pengawasdemo', password: 'KBCdemo2026', role: 'pengawas', nama: 'Pengawas Madrasah Demo' }
+  { id: 'demo-pengawas', username: 'pengawasdemo', password: 'KBCdemo2026', role: 'pengawas', nama: 'Pengawas Madrasah Demo' },
+  { id: 'demo-kamad', username: 'kamaddemo', password: 'KBCdemo2026', role: 'kepala_madrasah', nama: 'Kepala Madrasah Demo', madrasahId: 'madrasah-mtsn1' },
+  { id: 'demo-viewer', username: 'pimpinankbc', password: 'KBCdemo2026', role: 'viewer', nama: 'Pimpinan / Viewer Demo' }
 ]
 
 function loadTrialUser() {
