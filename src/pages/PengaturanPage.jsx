@@ -71,8 +71,8 @@ export default function PengaturanPage() {
       <PageHeader
         title="Pengaturan Aplikasi"
         description="Kelola identitas instansi, logo, bobot aspek KBC, dan backup data."
-        icon="âš™ï¸"
-        actions={<button className="btn-primary" onClick={onSave}>ðŸ’¾ Simpan Pengaturan</button>}
+        icon=""
+        actions={<button className="btn-primary" onClick={onSave}>Simpan Pengaturan</button>}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
