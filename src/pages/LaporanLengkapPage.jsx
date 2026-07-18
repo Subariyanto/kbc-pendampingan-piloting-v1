@@ -167,7 +167,10 @@ export default function LaporanLengkapPage() {
             <div className="mt-8 text-center" style={{ width: '44%', marginLeft: '52%' }}>
               <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               <p>Pengawas Pendamping,</p>
-              <div className="relative h-20 flex items-center justify-center">`r`n                {ttdPengawas && <img src={ttdPengawas} alt="Tanda tangan Pengawas Pendamping" className="absolute inset-0 mx-auto w-40 h-20 object-contain mix-blend-multiply" />}`r`n              </div>`r`n              <p className="font-semibold underline">{pengawasNamaLengkap}</p>
+              <div className="relative h-20 flex items-center justify-center">
+                {ttdPengawas && <img src={ttdPengawas} alt="Tanda tangan Pengawas Pendamping" className="absolute inset-0 mx-auto w-40 h-20 object-contain mix-blend-multiply" />}
+              </div>
+              <p className="font-semibold underline">{pengawasNamaLengkap}</p>
               <p>NIP. {pengawasNip}</p>
             </div>
           </div>
@@ -628,7 +631,10 @@ export default function LaporanLengkapPage() {
             <div className="mt-8 text-center" style={{ width: '44%', marginLeft: '52%' }}>
               <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               <p>Pengawas Pendamping,</p>
-              <div className="relative h-20 flex items-center justify-center">`r`n                {ttdPengawas && <img src={ttdPengawas} alt="Tanda tangan Pengawas Pendamping" className="absolute inset-0 mx-auto w-40 h-20 object-contain mix-blend-multiply" />}`r`n              </div>`r`n              <p className="font-semibold underline">{pengawasNamaLengkap}</p>
+              <div className="relative h-20 flex items-center justify-center">
+                {ttdPengawas && <img src={ttdPengawas} alt="Tanda tangan Pengawas Pendamping" className="absolute inset-0 mx-auto w-40 h-20 object-contain mix-blend-multiply" />}
+              </div>
+              <p className="font-semibold underline">{pengawasNamaLengkap}</p>
               <p>NIP. {pengawasNip}</p>
             </div>
           </div>
@@ -709,6 +715,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
