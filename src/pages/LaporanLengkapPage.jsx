@@ -5,7 +5,7 @@ import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolve
 function SignatureVisual({ signature, seal, groupShift = '', signatureShift = '-ml-12' }) {
   return (
     <div className={`h-20 flex items-center justify-center overflow-visible ${groupShift}`}>
-      {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85" />}
+      {seal && <img src={seal} alt="Stempel" className="relative z-0 w-28 h-28 object-contain opacity-85 mix-blend-multiply" />}
       {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? signatureShift : ''} relative z-20 w-40 h-20 object-contain object-left mix-blend-multiply`} />}
     </div>
   )
@@ -92,7 +92,7 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Ketua Pokjawas,</p>
-                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="-translate-x-12" />
+                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="translate-x-4" />
                     <p className="relative z-30 border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
                     <p>NIP. {ketuaNip}</p>
                   </div>
@@ -102,7 +102,7 @@ export default function LaporanLengkapPage() {
                   <div className="text-center">
                     <p>Mengetahui,</p>
                     <p>Ketua Pokjawas,</p>
-                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="-translate-x-12" />
+                    <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} groupShift="translate-x-4" />
                     <p className="relative z-30 inline-block px-8">{settings.ketuaPokjawas}</p>
                     <p>NIP. {settings.nipKetua}</p>
                   </div>
@@ -704,6 +704,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
