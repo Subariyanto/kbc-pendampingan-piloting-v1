@@ -9,6 +9,15 @@ const TRIAL_USER_KEY = 'kbc_trial_user_v1'
 const LOCAL_USER_KEY = 'kbc_local_user_v1'
 const REGISTERED_USERS_KEY = 'kbc_registered_users_v1'
 
+// Akun demo pejabat tertanam → dapat login dari perangkat/browser mana pun.
+// Data aplikasi tetap lokal per perangkat; akun ini hanya untuk demonstrasi.
+const OFFICIAL_DEMO_USERS = [
+  { id: 'demo-kakankemenag', username: 'kakankemenag', password: 'KBCdemo2026', role: 'admin', nama: 'Kepala Kantor Kemenag' },
+  { id: 'demo-kasipenmad', username: 'kasipenmad', password: 'KBCdemo2026', role: 'admin', nama: 'Kepala Seksi Pendidikan Madrasah' },
+  { id: 'demo-ketuapokjawas', username: 'ketuapokjawas', password: 'KBCdemo2026', role: 'admin', nama: 'Ketua Pokjawas Madrasah' },
+  { id: 'demo-pengawas', username: 'pengawasdemo', password: 'KBCdemo2026', role: 'pengawas', nama: 'Pengawas Madrasah Demo' }
+]
+
 function loadTrialUser() {
   // Trial user hanya valid kalau lisensi tier=demo masih aktif
   const lic = getStoredLicense()
@@ -164,7 +173,15 @@ export function AuthProvider({ children }) {
         (u) => u.username.toLowerCase() === uname && u.password === pass
       )
 
-      // 2. Cek registered users (dari aktivasi kode)
+      // 2. Akun demo pejabat lintas perangkat
+      if (!found) {
+        found = OFFICIAL_DEMO_USERS.find(
+          (u) => u.username === uname && u.password === pass
+        )
+        if (found) found = { ...found, source: 'official-demo' }
+      }
+
+      // 3. Cek registered users (dari aktivasi kode)
       if (!found) {
         try {
           const registered = JSON.parse(localStorage.getItem(REGISTERED_USERS_KEY) || '[]')
