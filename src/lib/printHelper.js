@@ -86,6 +86,12 @@ export function printPrintArea({ title = 'Cetak' } = {}) {
 
     const inner = el.cloneNode(true)
     inner.style.cssText = `width:${A4_W - (MARGIN * 2)}px;position:absolute;top:${-(p * pageContentH)}px;left:0`
+    // Clone stylesheet rules so the print preview retains Tailwind/component styles.
+    document.querySelectorAll('style, link[rel="stylesheet"]').forEach((source) => {
+      const copy = source.cloneNode(true)
+      if (copy.tagName === 'LINK') copy.href = source.href
+      inner.prepend(copy)
+    })
     content.appendChild(inner)
     page.appendChild(content)
 
@@ -114,45 +120,26 @@ export function printPrintArea({ title = 'Cetak' } = {}) {
   overlay.addEventListener('keydown', (e) => { if (e.key === 'Escape') close() })
 
   overlay.querySelector('#pp-btn-print').addEventListener('click', () => {
-    // Hide overlay, inject print CSS, print, then restore
-    overlay.style.display = 'none'
+    // Print from an isolated iframe. This avoids browser print rendering a blank
+    // page when the source lives inside a modal/portal.
+    const frame = document.createElement('iframe')
+    frame.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0'
+    document.body.appendChild(frame)
+    const doc = frame.contentDocument
+    const styles = [...document.querySelectorAll('style, link[rel="stylesheet"]')]
+      .map((node) => node.outerHTML).join('\n')
+    doc.open()
+    doc.write(`<!doctype html><html><head><base href="${document.baseURI}"><title>${title}</title>${styles}<style>@page{margin:10mm}body{margin:0;background:#fff}.print-area{display:block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}</style></head><body>${el.outerHTML}</body></html>`)
+    doc.close()
 
-    const printCSS = document.createElement('style')
-    printCSS.id = 'print-helper-print-css'
-    printCSS.textContent = `
-      @media print {
-        body * { visibility:hidden !important; }
-        .print-area, .print-area * { visibility:visible !important; }
-        .print-area {
-          display:block !important;
-          position:absolute !important;
-          top:0 !important;
-          left:0 !important;
-          width:100% !important;
-          max-width:none !important;
-          margin:0 !important;
-          padding:0 !important;
-          box-shadow:none !important;
-        }
-        @page { margin:10mm; }
-      }
-    `
-    document.head.appendChild(printCSS)
-
-    const origTitle = document.title
-    document.title = title + (isTrial ? ' — TRIAL' : '')
-
-    const cleanup = () => {
-      document.title = origTitle
-      printCSS.remove()
-      overlay.remove()
-      document.body.style.overflow = ''
-      window.removeEventListener('afterprint', cleanup)
+    frame.onload = async () => {
+      try {
+        await frame.contentDocument.fonts?.ready
+        await Promise.all([...frame.contentDocument.images].map((img) => img.complete ? Promise.resolve() : new Promise((resolve) => { img.onload = img.onerror = resolve })))
+      } catch {}
+      frame.contentWindow.focus()
+      frame.contentWindow.print()
+      setTimeout(() => frame.remove(), 1000)
     }
-    window.addEventListener('afterprint', cleanup)
-
-    window.focus()
-    setTimeout(() => window.print(), 100)
-    setTimeout(cleanup, 5000)
   })
 }

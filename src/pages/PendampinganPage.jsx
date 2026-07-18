@@ -546,7 +546,7 @@ function PrintModal({ item, mode, settings, instrumen, madrasah, pengawas, user,
           </div>
         )}
 
-        <SingleSignature tempat="Jember" tanggal={item.tanggal} namaPengawas={pengawasNama} nipPengawas={pengawasNip} namaLengkap={pengawasNamaLengkap} />
+        <SingleSignature tempat="Jember" tanggal={item.tanggal} namaPengawas={pengawasNama} nipPengawas={pengawasNip} namaLengkap={pengawasNamaLengkap} signature={settings?.ttdPengawas} />
       </div>
     </Modal>
   )
@@ -594,7 +594,7 @@ function FieldWithFill({ label, required, onFill, disabled, children }) {
   )
 }
 
-function SingleSignature({ tempat = 'Jember', tanggal, namaPengawas, nipPengawas, namaLengkap }) {
+function SingleSignature({ tempat = 'Jember', tanggal, namaPengawas, nipPengawas, namaLengkap, signature }) {
   const t = tanggal ? new Date(tanggal) : new Date()
   const tanggalLabel = t.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
   // Gabung nama + gelar, uppercase
@@ -605,7 +605,9 @@ function SingleSignature({ tempat = 'Jember', tanggal, namaPengawas, nipPengawas
       <div className="text-center" style={{ marginRight: '10%' }}>
         <p>{tempat}, {tanggalLabel}</p>
         <p>Pengawas Pendamping,</p>
-        <div style={{ height: 80 }} />
+        <div className="relative h-20 flex items-center justify-center">
+          {signature && <img src={signature} alt="Tanda tangan Pengawas Pendamping" className="absolute inset-0 mx-auto w-40 h-20 object-contain" />}
+        </div>
         <p className="font-semibold underline">{namaPengawasLengkap}</p>
         {nipPengawas && <p>NIP. {nipPengawas}</p>}
       </div>
