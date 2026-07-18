@@ -4,9 +4,9 @@ import { isKetuaPokjawas, resolvePengawasFromUser } from '../lib/pengawasResolve
 
 function SignatureVisual({ signature, seal }) {
   return (
-    <div className="signature-layer relative z-0 h-24 mt-1">
-      {seal && <img src={seal} alt="Stempel" className="absolute z-0 w-24 h-24 object-contain opacity-80 mix-blend-multiply left-1/2 -translate-x-1/2 -top-1" />}
-      {signature && <img src={signature} alt="Tanda tangan" className="absolute z-10 w-36 h-20 object-contain mix-blend-multiply left-1/2 -translate-x-1/2 top-1" />}
+    <div className="signature-layer relative z-0 h-28 mt-1 mx-auto max-w-xs">
+      {seal && <img src={seal} alt="Stempel" className="absolute z-0 w-32 h-32 object-contain opacity-85 mix-blend-multiply left-[38%] -translate-x-1/2 -top-2" />}
+      {signature && <img src={signature} alt="Tanda tangan" className="absolute z-10 w-48 h-24 object-contain object-center mix-blend-multiply left-[58%] -translate-x-1/2 top-2" />}
     </div>
   )
 }
@@ -84,8 +84,8 @@ export default function LaporanLengkapPage() {
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
                     <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} />
-                    <div className="relative z-30">
-                      <p className="border-t border-slate-300 pt-2 inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
+                    <div className="relative z-30 -mt-7">
+                      <p className="font-bold underline inline-block px-4">{settings.kepalaKemenag || '____________________'}</p>
                       <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                     </div>
                   </div>
@@ -93,8 +93,8 @@ export default function LaporanLengkapPage() {
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Ketua Pokjawas,</p>
                     <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} />
-                    <div className="relative z-30">
-                      <p className="border-t border-slate-300 pt-2 inline-block px-8">{ketuaNama}</p>
+                    <div className="relative z-30 -mt-7">
+                      <p className="font-bold underline inline-block px-4">{ketuaNama}</p>
                       <p>NIP. {ketuaNip}</p>
                     </div>
                   </div>
@@ -105,8 +105,8 @@ export default function LaporanLengkapPage() {
                     <p>Mengetahui,</p>
                     <p>Ketua Pokjawas,</p>
                     <SignatureVisual signature={settings.ttdKetuaPokjawas} seal={settings.stempelPokjawas} />
-                    <div className="relative z-30">
-                      <p className="inline-block px-8">{settings.ketuaPokjawas}</p>
+                    <div className="relative z-30 -mt-7">
+                      <p className="font-bold underline inline-block px-4">{settings.ketuaPokjawas}</p>
                       <p>NIP. {settings.nipKetua}</p>
                     </div>
                   </div>
@@ -114,8 +114,8 @@ export default function LaporanLengkapPage() {
                     <p>{tempatTandaTangan}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                     <p>Pengawas Pendamping,</p>
                     <SignatureVisual signature={settings.ttdPengawas} />
-                    <div className="relative z-30">
-                      <p className="whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
+                    <div className="relative z-30 -mt-7">
+                      <p className="font-bold underline whitespace-nowrap text-xs tracking-tight">{pengawasNamaLengkap}</p>
                       <p className="whitespace-nowrap">NIP. {pengawasNip}</p>
                     </div>
                   </div>
@@ -123,8 +123,8 @@ export default function LaporanLengkapPage() {
                     <p>Mengetahui,</p>
                     <p>Kepala Kemenag Kab. Jember,</p>
                     <SignatureVisual signature={settings.ttdKepalaKemenag} seal={settings.stempelKemenag} />
-                    <div className="relative z-30">
-                      <p className="inline-block px-8">{settings.kepalaKemenag || '____________________'}</p>
+                    <div className="relative z-30 -mt-7">
+                      <p className="font-bold underline inline-block px-4">{settings.kepalaKemenag || '____________________'}</p>
                       <p>NIP. {settings.nipKepalaKemenag || '____________________'}</p>
                     </div>
                   </div>
