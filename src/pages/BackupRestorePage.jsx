@@ -2,18 +2,22 @@ import { useRef, useState } from 'react'
 import PageHeader from '../components/PageHeader.jsx'
 import { ConfirmDialog } from '../components/Modal.jsx'
 import { useData } from '../context/DataContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import { useToast } from '../context/ToastContext.jsx'
 import { downloadJSON, readJSONFile } from '../lib/utils.js'
 
 export default function BackupRestorePage() {
   const { state, resetAll, restoreAll } = useData()
+  const { user } = useAuth()
   const toast = useToast()
   const [confirmReset, setConfirmReset] = useState(false)
   const [confirmRestore, setConfirmRestore] = useState(null)
   const fileRestore = useRef(null)
 
   const onBackup = () => {
-    downloadJSON(`backup-kbc-pendampingan-${new Date().toISOString().slice(0, 10)}.json`, state)
+    const safeUserName = String(user?.nama || user?.username || 'pengguna')
+      .trim().replace(/[^a-zA-Z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'pengguna'
+    downloadJSON(`backup-kbc-pendampingan-${safeUserName}-${new Date().toISOString().slice(0, 10)}.json`, state)
     toast.success('Backup berhasil diunduh')
   }
 
