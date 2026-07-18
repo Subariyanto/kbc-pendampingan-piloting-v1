@@ -6,7 +6,7 @@ function SignatureVisual({ signature, seal }) {
   return (
     <div className="h-20 flex items-center justify-center overflow-visible">
       {seal && <img src={seal} alt="Stempel" className="relative z-10 w-20 h-20 object-contain opacity-85" />}
-      {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? '-ml-5' : ''} relative z-20 w-44 h-20 object-contain object-left`} />}
+      {signature && <img src={signature} alt="Tanda tangan" className={`${seal ? '-ml-5' : ''} relative z-20 w-44 h-20 object-contain object-left mix-blend-multiply`} />}
     </div>
   )
 }
