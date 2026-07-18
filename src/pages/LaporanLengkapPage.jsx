@@ -163,12 +163,11 @@ export default function LaporanLengkapPage() {
               komprehensif mengenai pelaksanaan, capaian, serta rekomendasi tindak lanjut implementasi KBC 
               di madrasah piloting binaan kami.
             </p>
-            <div className="mt-8 text-right">
-              <p>{settings.subInstansi}</p>
+            <div className="mt-8 text-center" style={{ width: '44%', marginLeft: '52%' }}>
+              <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               <p>Pengawas Pendamping,</p>
-              <div style={{ height: 20 }} />
-              <div style={{ height: 60 }} />
-              <p className="font-semibold">{pengawasNamaLengkap}</p>
+              <div style={{ height: 80 }} />
+              <p className="font-semibold underline">{pengawasNamaLengkap}</p>
               <p>NIP. {pengawasNip}</p>
             </div>
           </div>
@@ -626,12 +625,11 @@ export default function LaporanLengkapPage() {
               <li>Perluasan program piloting ke madrasah-madrasah lain secara bertahap</li>
             </ul>
 
-            <div className="mt-8 text-right">
-              <p>{settings.subInstansi}</p>
+            <div className="mt-8 text-center" style={{ width: '44%', marginLeft: '52%' }}>
+              <p>{settings.kabupaten || 'Jember'}, {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               <p>Pengawas Pendamping,</p>
-              <div style={{ height: 20 }} />
-              <div style={{ height: 60 }} />
-              <p className="font-semibold">{pengawasNamaLengkap}</p>
+              <div style={{ height: 80 }} />
+              <p className="font-semibold underline">{pengawasNamaLengkap}</p>
               <p>NIP. {pengawasNip}</p>
             </div>
           </div>
@@ -712,6 +710,7 @@ export default function LaporanLengkapPage() {
     </div>
   )
 }
+
 
 
 
