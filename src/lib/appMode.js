@@ -1,15 +1,13 @@
 // =============================================================================
-// Mode aplikasi: lokal-only (multi-pengawas isolation via browser localStorage)
+// Mode aplikasi: multi-user (Supabase cloud sync antar perangkat)
 // =============================================================================
-// Tiap pengawas yang aktivasi punya database sendiri di browser mereka.
-// Supabase tetap dipakai HANYA untuk:
-//   1. Validasi kode aktivasi (read activation_codes)
-//   2. Tag kode sebagai 'used' setelah aktivasi
-//   3. Yanto-as-admin: terbitkan & kelola kode aktivasi
+// false = mode multi-user: data tersinkron via Supabase, semua role lihat data sama
+// true  = mode lokal-only (emergency fallback, data per-browser)
 //
-// Data aplikasi (madrasah, pengawas, jadwal, pendampingan, eviden, tindak_lanjut,
-// instrumen, settings) SEMUA tersimpan di localStorage browser.
-//
-// Kalau ingin balik ke mode multi-tenant Supabase, set ini ke false.
+// Supabase dipakai untuk:
+//   1. Auth (login email + password)
+//   2. Validasi kode aktivasi (read activation_codes)
+//   3. Sinkronisasi data (madrasah, pengawas, jadwal, pendampingan, eviden, dll)
+//   4. Tag kode aktivasi sebagai 'used' setelah aktivasi
 // =============================================================================
-export const LOCAL_ONLY_MODE = true
+export const LOCAL_ONLY_MODE = false

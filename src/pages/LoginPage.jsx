@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useToast } from '../context/ToastContext.jsx'
 import { useData } from '../context/DataContext.jsx'
+import { SUPABASE_ENABLED } from '../lib/supabase.js'
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -11,14 +12,14 @@ export default function LoginPage() {
   const { state } = useData()
   const settings = state.settings
 
-  const [username, setUsername] = useState('')
+  const [identifier, setIdentifier] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   const submit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    const res = await login(username.trim(), password)
+    const res = await login(identifier.trim(), password)
     setLoading(false)
     if (!res.ok) {
       toast.error(res.error)
@@ -29,7 +30,6 @@ export default function LoginPage() {
   }
 
   const handleActivationLink = () => {
-    // Hapus lisensi dan data aktivasi agar ActivationGate tampilkan ActivationPage
     try {
       localStorage.removeItem('kbc_license_v1')
       localStorage.removeItem('kbc_local_user_v1')
@@ -90,19 +90,23 @@ export default function LoginPage() {
 
           <h2 className="text-xl font-semibold text-navy-900">Masuk ke Aplikasi</h2>
           <p className="text-sm text-slate-500 mb-6">
-            Gunakan nama & password yang Anda buat saat aktivasi kode.
+            {SUPABASE_ENABLED
+              ? 'Gunakan email & password yang Anda buat saat aktivasi kode.'
+              : 'Gunakan nama & password yang Anda buat saat aktivasi kode.'}
           </p>
 
           <form onSubmit={submit} className="space-y-4">
             <div>
-              <label className="label">Nama</label>
+              <label className="label">
+                {SUPABASE_ENABLED ? 'Email' : 'Nama'}
+              </label>
               <input
                 className="input"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoComplete="name"
-                placeholder="Nama lengkap Anda"
+                type={SUPABASE_ENABLED ? 'email' : 'text'}
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                autoComplete={SUPABASE_ENABLED ? 'email' : 'name'}
+                placeholder={SUPABASE_ENABLED ? 'nama@email.com' : 'Nama lengkap Anda'}
                 required
               />
             </div>
