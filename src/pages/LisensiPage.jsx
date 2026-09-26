@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { generateCode, TIER_LABELS, MASTER_CODE, fetchRemoteCodes, saveLocalCodes, tryLoadLocalCodes } from '../lib/codes.js'
+import { generateCode, TIER_LABELS, fetchRemoteCodes, saveLocalCodes, tryLoadLocalCodes } from '../lib/codes.js'
 
 export default function LisensiPage() {
   const [codes, setCodes] = useState([])
@@ -93,13 +93,13 @@ export default function LisensiPage() {
         </div>
       </div>
 
-      {/* Master Code */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-        <p className="text-sm font-semibold text-amber-800">Master Code (Admin Internal)</p>
-        <code className="mt-1 block text-lg font-mono tracking-widest text-amber-900 bg-amber-100 px-3 py-1.5 rounded">
-          {MASTER_CODE}
-        </code>
-        <p className="text-xs text-amber-600 mt-1">Kode ini selalu valid. Jangan dibagikan ke pengguna umum.</p>
+      {/* Master Code — tidak ditampilkan demi keamanan (diverifikasi server) */}
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+        <p className="text-sm font-semibold text-slate-700">Master Code (Admin Internal)</p>
+        <p className="text-xs text-slate-500 mt-1">
+          Master code tidak lagi ditampilkan di sini demi keamanan. Kode diverifikasi di server Pusat Lisensi.
+          Hubungi pengelola aplikasi bila memerlukan kode master.
+        </p>
       </div>
 
       {/* Generate Form */}

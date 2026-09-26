@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { saveLicense, MASTER_CODE } from '../lib/codes.js'
+import { saveLicense, verifyMasterCode } from '../lib/codes.js'
 import { verifySignedCode } from '../lib/signedLicense.js'
 import { SUPABASE_ENABLED, supabase } from '../lib/supabase.js'
 import { useData } from '../context/DataContext.jsx'
+import { getDeviceId, isCodeUsed, markCodeUsed, getUsedCodeDevice } from '../lib/deviceLock.js'
+import { LOCAL_ONLY_MODE } from '../lib/appMode.js'
 
 const REGISTERED_USERS_KEY = 'kbc_registered_users_v1'
 
-// Simpan user ke registered list (nama+password, bisa login) — fallback mode lokal
 function saveRegisteredUser(nama, password, role, madrasahId, email) {
   try {
     const list = JSON.parse(localStorage.getItem(REGISTERED_USERS_KEY) || '[]')
@@ -49,10 +50,32 @@ export default function ActivationPage({ onActivated }) {
     if (password.length < 4) { setError('Password minimal 4 karakter'); return }
     if (password !== password2) { setError('Konfirmasi password tidak cocok'); return }
 
+    // === Master code diverifikasi server (kode asli tidak ada di file ini) ===
     setLoading(true); setError('')
+    let isMaster = false
+    try {
+      const mv = await verifyMasterCode(cleanCode)
+      isMaster = !!(mv && mv.valid)
+    } catch { isMaster = false }
+
+    // === One-time use: cek apakah kode sudah pernah dipakai ===
+    if (!isMaster && isCodeUsed(cleanCode)) {
+      const usedDevice = getUsedCodeDevice(cleanCode)
+      const currentDevice = getDeviceId()
+      if (usedDevice && usedDevice !== currentDevice) {
+        setError('Kode aktivasi ini sudah dipakai di perangkat lain. Setiap kode hanya berlaku untuk 1 perangkat.')
+        setLoading(false)
+        return
+      }
+      // Same device re-use: juga ditolak (one-time)
+      setError('Kode aktivasi ini sudah pernah dipakai. Setiap kode hanya bisa dipakai 1 kali.')
+      setLoading(false)
+      return
+    }
+
     try {
       let tier, label = '', exp = 0, role = 'pengawas'
-      if (cleanCode === MASTER_CODE) {
+      if (isMaster) {
         tier = 'pro'; label = 'Master (Owner)'; role = 'admin'
       } else {
         const r = await verifySignedCode(cleanCode)
@@ -68,11 +91,46 @@ export default function ActivationPage({ onActivated }) {
         }
       }
 
-      // Simpan lisensi
-      saveLicense(cleanCode, tier, { via: 'signed-license', label, expiresAt: exp, nama: cleanNama, role })
+      // === Device lock: bind lisensi ke device ID ===
+      const deviceId = getDeviceId()
+      saveLicense(cleanCode, tier, { 
+        via: 'signed-license', 
+        label, 
+        expiresAt: exp, 
+        nama: cleanNama, 
+        role,
+        deviceId,
+        deviceLocked: !isMaster
+      })
 
-      if (SUPABASE_ENABLED && supabase) {
-        // ===== Mode Supabase: daftar via Supabase Auth =====
+      // === Tandai kode sebagai sudah terpakai (one-time) ===
+      if (!isMaster) {
+        markCodeUsed(cleanCode, deviceId, cleanNama)
+      }
+
+      // Simpan akun lokal di perangkat ini. Ini wajib dilakukan meskipun
+      // Supabase aktif, karena LOCAL_ONLY_MODE memakai login lokal untuk akun
+      // hasil aktivasi (tanpa ketergantungan konfirmasi email Supabase).
+      saveRegisteredUser(cleanNama, password, role, selectedMadrasahId, cleanEmail)
+
+      if (SUPABASE_ENABLED && supabase && !LOCAL_ONLY_MODE) {
+        // Klaim atomik di server: satu kode hanya bisa dikunci sekali.
+        if (!isMaster) {
+          const { data: claim, error: claimError } = await supabase.rpc('claim_activation_code', {
+            p_code: cleanCode,
+            p_nama: cleanNama,
+            p_device_id: deviceId
+          })
+          if (claimError || !claim?.ok) {
+            setError(claimError?.message || claim?.error || 'Kode aktivasi sudah digunakan atau tidak valid')
+            setLoading(false)
+            return
+          }
+          tier = claim.tier || tier
+          role = claim.role || role
+          exp = claim.validity_days > 0 ? Date.now() + claim.validity_days * 86400000 : exp
+        }
+
         const { data, error: signUpError } = await supabase.auth.signUp({
           email: cleanEmail,
           password,
@@ -90,22 +148,17 @@ export default function ActivationPage({ onActivated }) {
           setLoading(false)
           return
         }
-        // Tandai activation code sebagai used di Supabase (best-effort)
-        if (cleanCode !== MASTER_CODE) {
+        if (!isMaster) {
           try {
             await supabase
               .from('activation_codes')
-              .update({ used: true, used_by: data.user?.id, used_at: new Date().toISOString() })
+              .update({ used: true, used_by: data.user?.id, used_at: new Date().toISOString(), device_id: deviceId })
               .eq('code', cleanCode)
               .eq('used', false)
           } catch {}
         }
-      } else {
-        // ===== Mode lokal: simpan ke localStorage =====
-        saveRegisteredUser(cleanNama, password, role, selectedMadrasahId, cleanEmail)
       }
 
-      // Hapus kbc_local_user_v1 agar user login manual (tidak auto-bypass)
       try { localStorage.removeItem('kbc_local_user_v1') } catch {}
 
       onActivated({ code: cleanCode, tier })
@@ -116,10 +169,9 @@ export default function ActivationPage({ onActivated }) {
   }
 
   const goToLogin = () => {
-    // Buat lisensi temporary untuk bypass ActivationGate (saveLicense sudah di-import di atas)
     saveLicense('TEMP-LOGIN', 'pro', { 
       via: 'temp-login-bypass',
-      expiresAt: Date.now() + 3600000 // 1 jam, cukup untuk login
+      expiresAt: Date.now() + 3600000
     })
     window.location.reload()
   }
@@ -160,9 +212,10 @@ export default function ActivationPage({ onActivated }) {
               placeholder="KBC-XXXX-XXXXXXX"
               value={code} onChange={(e) => { setCode(e.target.value.toUpperCase()); setError('') }}
               autoComplete="off" spellCheck={false} />
+            <p className="text-[10px] text-amber-600 mt-1">⚠️ Kode hanya berlaku 1 kali untuk 1 perangkat.</p>
           </div>
 
-          {code.trim().toUpperCase() !== MASTER_CODE && (
+          {!isMaster && (
             <>
               <div>
                 <label className="label text-navy-900">Peran / Jabatan</label>

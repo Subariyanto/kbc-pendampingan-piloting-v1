@@ -1,10 +1,31 @@
 // Kode aktivasi lisensi KBC Pendampingan Piloting
-// Pola: localStorage > REMOTE_CODES (gh-pages) > BUNDLED_CODES > MASTER_CODE
+// Pola: localStorage > REMOTE_CODES (gh-pages) > BUNDLED_CODES > master (server)
 
 import { uid } from './utils.js'
 
-// Master code — selalu valid, buat Yanto & admin internal
-export const MASTER_CODE = 'KBC-POKJAWAS-JEMBER-2026'
+// === PUSAT LISENSI APLIKASI (verifikasi master code terpusat) ===
+// Master code TIDAK lagi disimpan di file ini; diverifikasi di server.
+const PUSAT_URL = 'https://llaukzsztguwrtwdubpm.supabase.co'
+const PUSAT_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsYXVrenN6dGd1d3J0d2R1YnBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxOTI1NDgsImV4cCI6MjEwMjc2ODU0OH0.DqKtA0aus9nOLViMEWjAPvYIAdLS_EKU3H8dYKe_Zhk'
+
+/** Verifikasi master/admin code ke server Pusat Lisensi (kode asli tidak ada di klien). */
+export async function verifyMasterCode(code) {
+  try {
+    const r = await fetch(PUSAT_URL.replace(/\/$/, '') + '/rest/v1/rpc/verify_master_code', {
+      method: 'POST',
+      headers: {
+        apikey: PUSAT_ANON_KEY,
+        Authorization: 'Bearer ' + PUSAT_ANON_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ p_app_slug: 'kbc-pendampingan', p_code: String(code || '').trim() })
+    })
+    if (!r.ok) return { valid: false, reason: 'network' }
+    return await r.json()
+  } catch {
+    return { valid: false, reason: 'network' }
+  }
+}
 
 // Prefixes: tier kode (bisa dipakai untuk pelacakan)
 export const TIER_LABELS = {
@@ -68,26 +89,29 @@ export function findCode(code, codes) {
   )
 }
 
-// Validasi kode: cek local dulu, baru bundle, baru master
-export function validateCode(code, bundledCodes = []) {
+// Validasi kode: cek local dulu, baru bundle, baru master (server-side)
+export async function validateCode(code, bundledCodes = []) {
   const clean = String(code).trim()
 
-  // 1. Master code
-  if (clean === MASTER_CODE) {
-    return { valid: true, tier: 'pro', via: 'master' }
-  }
-
-  // 2. Cached/local codes
+  // 1. Cached/local codes
   const stored = tryLoadLocalCodes()
   const localMatch = findCode(clean, stored)
   if (localMatch && !localMatch.used) {
     return { valid: true, tier: localMatch.tier || 'basic', via: 'local' }
   }
 
-  // 3. Bundled codes
+  // 2. Bundled codes
   const bundledMatch = findCode(clean, bundledCodes)
   if (bundledMatch && !bundledMatch.used) {
     return { valid: true, tier: bundledMatch.tier || 'basic', via: 'bundled' }
+  }
+
+  // 3. Master code → diverifikasi server (kode asli tidak ada di file ini)
+  if (clean) {
+    const mv = await verifyMasterCode(clean)
+    if (mv && mv.valid) {
+      return { valid: true, tier: mv.tier || 'pro', via: 'master', master: true, role: mv.role || 'admin' }
+    }
   }
 
   return { valid: false, error: 'Kode aktivasi tidak ditemukan' }
@@ -134,8 +158,8 @@ function genSegment(chars) {
 }
 
 // Lookup tier dari kode
-export function getCodeTier(code, bundledCodes = []) {
-  const result = validateCode(code, bundledCodes)
+export async function getCodeTier(code, bundledCodes = []) {
+  const result = await validateCode(code, bundledCodes)
   return result.tier || null
 }
 

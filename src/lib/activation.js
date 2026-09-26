@@ -13,7 +13,7 @@
 // Supabase mode.
 
 import { supabase } from './supabase.js'
-import { MASTER_CODE, getStoredLicense, saveLicense, clearLicense } from './codes.js'
+import { getStoredLicense, saveLicense, clearLicense, verifyMasterCode } from './codes.js'
 
 // ---- Pencarian kode aktivasi di Supabase ----
 export async function lookupActivationCode(code) {
@@ -55,9 +55,15 @@ export async function registerWithEmailAndCode({ email, password, nama, code }) 
     return { ok: false, error: 'Kode aktivasi wajib diisi' }
   }
 
-  // 1. Master code → skip Supabase, langsung lisensi (akun tetap dibuat di Supabase)
+  // 1. Master code → diverifikasi server Pusat Lisensi (kode asli tidak ada di klien)
   let activationData = null
-  if (cleanCode === MASTER_CODE) {
+  let isMaster = false
+  try {
+    const mv = await verifyMasterCode(cleanCode)
+    isMaster = !!(mv && mv.valid)
+  } catch { isMaster = false }
+
+  if (isMaster) {
     // Master code: role admin default, tier pro lifetime
     activationData = {
       role: 'admin', nama: cleanNama,
@@ -142,8 +148,13 @@ export async function registerWithEmailAndCode({ email, password, nama, code }) 
 export async function activateAndRegister(code) {
   const clean = String(code).trim().toUpperCase()
 
-  // 1. Master code → skip Supabase Auth, langsung lisensi
-  if (clean === MASTER_CODE) {
+  // 1. Master code → diverifikasi server, langsung lisensi
+  let isMaster = false
+  try {
+    const mv = await verifyMasterCode(clean)
+    isMaster = !!(mv && mv.valid)
+  } catch { isMaster = false }
+  if (isMaster) {
     saveLicense(clean, 'pro', { via: 'master' })
     return { ok: true, mode: 'master', message: 'Master code diterima — akses penuh' }
   }
@@ -170,5 +181,5 @@ export async function activateAndRegister(code) {
 }
 
 // ---- Re-export dr codes.js untuk kompatibilitas ----
-export { MASTER_CODE } from './codes.js'
+export { verifyMasterCode } from './codes.js'
 export { getStoredLicense, saveLicense, clearLicense } from './codes.js'
